@@ -12,9 +12,5 @@ class Time extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
-    protected $fillable = ['date', 'start_time', 'closing_time'];
-    public static $rules = array(
-        'date' =>'required|date_format:Y-m-d',
-        'start_time' => 'date_format:H:i:s',
-    );
+    protected $fillable = ['start_time', 'end_time'];
 }
