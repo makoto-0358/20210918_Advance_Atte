@@ -7,7 +7,36 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
+                    <form action="/attendance/start" method="post">
+                        <button type="submit">勤務開始</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form action="/attendance/end" method="post">
+                        <button type="submit">勤務終了</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form action="/break/start" method="post">
+                        <button type="submit">休憩開始</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form action="/break/end" method="post">
+                        <button type="submit">休憩終了</button>
+                    </form>
                 </div>
             </div>
         </div>
