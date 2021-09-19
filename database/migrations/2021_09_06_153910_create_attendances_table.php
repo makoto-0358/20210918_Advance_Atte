@@ -16,9 +16,8 @@ class CreateAttendancesTable extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id('id');
             $table->integer('user_id')->nullable();
-            $table->date('date');
             $table->timestamp('start_time')->useCurrent()->nullable();
-            $table->timestamp('closing_time')->useCurrent()->nullable();
+            $table->timestamp('end_time')->useCurrent()->nullable();
         });
     }
 
