@@ -27,9 +27,9 @@ Route::get('/attendance', function () {
     return view('attendance');
 })->middleware(['auth'])->name('attendance');
 
-Route::post('/startatte', [AttendanceController::class, 'startatte']);
-Route::post('/endatte', [AttendanceController::class, 'endatte']);
-Route::post('/startbreak', [BreakController::class, 'startbreak']);
-Route::post('/endbreak', [BreakController::class, 'endbreak']);
+Route::post('/attendance/start', [AttendanceController::class, 'start']);
+Route::post('/attendance/end', [AttendanceController::class, 'end']);
+Route::post('/break/start', [BreakController::class, 'start']);
+Route::post('/break/end', [BreakController::class, 'end']);
 
 require __DIR__.'/auth.php';
