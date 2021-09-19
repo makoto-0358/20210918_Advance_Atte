@@ -1,6 +1,6 @@
 <x-applogined-layout>
     <div>
-        <div>{{ Auth::user()->name }}さんお疲れ様です！</div>
+        {{ Auth::user()->name }}さんお疲れ様です！
     </div>
 
     <div class="py-12">
