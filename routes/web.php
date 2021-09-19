@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserContoroller;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\RestController;
 use App\Http\Controllers\SessionController;
 
 /*
@@ -29,7 +30,7 @@ Route::get('/attendance', function () {
 
 Route::post('/attendance/start', [AttendanceController::class, 'start']);
 Route::post('/attendance/end', [AttendanceController::class, 'end']);
-Route::post('/rest/start', [BreakController::class, 'start']);
-Route::post('/rest/end', [BreakController::class, 'end']);
+Route::post('/rest/start', [RestController::class, 'start']);
+Route::post('/rest/end', [RestController::class, 'end']);
 
 require __DIR__.'/auth.php';
