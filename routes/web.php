@@ -29,7 +29,7 @@ Route::get('/attendance', function () {
 
 Route::post('/attendance/start', [AttendanceController::class, 'start']);
 Route::post('/attendance/end', [AttendanceController::class, 'end']);
-Route::post('/break/start', [BreakController::class, 'start']);
-Route::post('/break/end', [BreakController::class, 'end']);
+Route::post('/rest/start', [BreakController::class, 'start']);
+Route::post('/rest/end', [BreakController::class, 'end']);
 
 require __DIR__.'/auth.php';
