@@ -7,15 +7,6 @@
 
     <div>
         <div>{{ Auth::user()->name }}さんお疲れ様です！</div>
-        <a href="{{route('index')}}">ホーム</a>
-        <a href="{{route('attendance')}}">日付一覧</a>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <a href="route('logout')"
-                onclick="event.preventDefault();
-                    this.closest('form').submit();">
-                        {{ __('Log Out') }}
-        </form>
     </div>
 
     <div class="py-12">
