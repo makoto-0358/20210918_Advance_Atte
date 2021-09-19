@@ -6,6 +6,7 @@
     </x-slot>
 
     <div>
+        <div>{{ Auth::user()->name }}さんお疲れ様です！</div>
         <a href="{{route('index')}}">ホーム</a>
         <a href="{{route('attendance')}}">日付一覧</a>
         <form method="POST" action="{{ route('logout') }}">
