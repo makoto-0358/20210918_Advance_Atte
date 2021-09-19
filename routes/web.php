@@ -23,16 +23,8 @@ Route::get('/', function () {
     return view('index');
 })->middleware(['auth'])->name('index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Route::get('/attendance', function () {
     return view('attendance');
 })->middleware(['auth'])->name('attendance');
 
 require __DIR__.'/auth.php';
-
-Route::get('/welcome', function () {
-    return view('welcome');
-});
