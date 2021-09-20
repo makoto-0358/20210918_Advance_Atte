@@ -9,8 +9,9 @@ class Attendance extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['start_time', 'end_time'];
+
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
-    protected $fillable = ['start_time', 'end_time'];
 }
