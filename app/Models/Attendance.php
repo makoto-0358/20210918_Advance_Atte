@@ -9,11 +9,9 @@ class Attendance extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['start_time', 'end_time'];
-
+    protected $guarded = array('id');
     public static $rules = array(
-        'start_time' => 'required',
-        'end_time' => 'nullable',
+        'user_id' => 'required',
     );
 
     public function user(){
