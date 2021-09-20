@@ -11,6 +11,11 @@ class Attendance extends Model
 
     protected $fillable = ['start_time', 'end_time'];
 
+    public static $rules = array(
+        'start_time' => 'required',
+        'end_time' => 'nullable',
+    );
+
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
