@@ -9,7 +9,9 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form action="/attendance/start" method="post">
                         @csrf
-                        <button type="submit">勤務開始</button>
+                        <table>
+                            <tr><td><button type="submit">勤務開始</button></td></tr>
+                        </table>
                     </form>
                 </div>
             </div>

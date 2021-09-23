@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use Illuminate\Support\facades\Auth;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -10,8 +11,9 @@ class AttendanceController extends Controller
     public function start(Request $request){
         $this->validate($request, Attendance::$rules);
         $form = $request->all();
+        $form['user_id'] = Auth::user()->id;
         Attendance::create($form);
-        return redirect('');
+        return view('welcome');
     }
     public function end(Request $request){
         $attendance = attendance::find($request->id);
