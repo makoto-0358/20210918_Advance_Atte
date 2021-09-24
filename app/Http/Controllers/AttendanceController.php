@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AttendanceController extends Controller
 {
     public function start(Request $request){
-        $this->validate($request, Attendance::$rules);
+        // $this->validate($request, Attendance::$rules);
         $form = $request->all();
         $form['user_id'] = Auth::user()->id;
         Attendance::create($form);
