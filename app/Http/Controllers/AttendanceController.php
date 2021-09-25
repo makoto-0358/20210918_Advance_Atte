@@ -13,7 +13,7 @@ class AttendanceController extends Controller
         $form = $request->all();
         $form['user_id'] = Auth::user()->id;
         Attendance::create($form);
-        return view('welcome');
+        return redirect('');
     }
     public function end(Request $request){
         $attendance = attendance::find($request->id);
