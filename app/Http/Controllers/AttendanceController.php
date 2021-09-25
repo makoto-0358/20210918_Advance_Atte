@@ -17,7 +17,7 @@ class AttendanceController extends Controller
     }
     public function end(Request $request){
         $attendance = attendance::find($request->id);
-        $this->validate($request, Attendance::rules);
+        // $this->validate($request, Attendance::rules);
         $form = $request->all();
         unset($form["_token"]);
         Attendance::update($form);
