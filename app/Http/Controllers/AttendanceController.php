@@ -16,12 +16,10 @@ class AttendanceController extends Controller
         return redirect('');
     }
     public function end(Request $request){
-        $attendance = Attendance::where('user_id',Auth::user()->id)->latest('id')->first();
         // $this->validate($request, Attendance::rules);
-        dd($attendance);
         $form = $request->all();
         unset($form["_token"]);
-        Attendance::update($form);
+        Attendance::where('user_id',Auth::user()->id)->latest('id')->first()->update($form);
         return redirect('');
     }
 }
