@@ -18,12 +18,9 @@ class AttendanceController extends Controller
     public function end(Request $request){
         // $this->validate($request, Attendance::rules);
         $form = $request->all();
-        // $form['end_time'] = useCurrent();
-        // $form['user_id'] = Auth::user()->id;
+        $form['end_time'] = now();
         unset($form["_token"]);
-        $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
-        dd($attendance);
-        // ->update($form);
+        $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->first()->update($form);
         return redirect('');
     }
 }
