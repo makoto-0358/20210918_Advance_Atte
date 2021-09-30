@@ -9,6 +9,11 @@ class Rest extends Model
 {
     use HasFactory;
 
+    protected $guarded = array('id');
+    public static $rules = array(
+        'attendance_id' => 'required',
+    );
+
     public function Attendance(){
         return $this->belongsTo('App\Models\Attendance');
     }
