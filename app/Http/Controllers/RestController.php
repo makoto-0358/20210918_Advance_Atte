@@ -3,22 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rest;
+use Illuminate\Support\facades\Auth;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 
-class RestController extends Controller
+class restController extends Controller
 {
     public function start(Request $request){
-        $this->validate($request, Rest::rules);
+        // $this->validate($request, Rest::$rules);
         $form = $request->all();
+        // $for= Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
+        // dd($for);
+        $form['attendance_id'] = Attendance()->latest('id')->first();
+        dd($form);
         Rest::create($form);
         return redirect('');
     }
     public function end(Request $request){
-        $attendance = Rest::find($request->id);
-        $this->validate($request, Rest::rules);
+        // $this->validate($request, Rest::rules);
         $form = $request->all();
+        $form['end_time'] = now();
         unset($form["_token"]);
-        Rest::update($form);
+        $rest = Rest::where('attendance_id', Auth::user()->id)->latest('id')->first()->update($form);
         return redirect('');
     }
 }
