@@ -12,8 +12,6 @@ class restController extends Controller
     public function start(Request $request){
         // $this->validate($request, Rest::$rules);
         $form = $request->all();
-        // $for= Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
-        // dd($for);
         $form['attendance_id'] = Attendance()->latest('id')->first();
         dd($form);
         Rest::create($form);
