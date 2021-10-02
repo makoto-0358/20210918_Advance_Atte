@@ -33,7 +33,8 @@ class restController extends Controller
         $form = $request->all();
         $form['end_time'] = now();
         unset($form["_token"]);
-        $rest = Rest::where('attendance_id', Auth::user()->id)->latest('id')->first()->update($form);
+        $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
+        $rest = Rest::where('attendance_id', $attendance->id)->latest('id')->first()->update($form);
         return redirect('');
     }
 }
