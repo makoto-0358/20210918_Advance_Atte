@@ -17,5 +17,4 @@ class Rest extends Model
     public function Attendance(){
         return $this->belongsTo('App\Models\Attendance');
     }
-    protected $fillable = ['start_time', 'end_time'];
 }
