@@ -10,14 +10,27 @@ use Illuminate\Http\Request;
 class restController extends Controller
 {
     public function start(Request $request){
+
+        // 出勤中であることを確認。
+
+
+        // 休憩中でないことを確認。
+
+
         // $this->validate($request, Rest::$rules);
         $form = $request->all();
-        $form['attendance_id'] = Attendance()->latest('id')->first();
-        dd($form);
+        $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
+        // dd($attendance);
+        $form['attendance_id'] = $attendance->id;
+        // dd($form);
         Rest::create($form);
         return redirect('');
     }
     public function end(Request $request){
+
+        // 休憩中であることを確認。
+
+
         // $this->validate($request, Rest::rules);
         $form = $request->all();
         $form['end_time'] = now();
