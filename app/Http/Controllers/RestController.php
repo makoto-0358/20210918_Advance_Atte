@@ -20,9 +20,7 @@ class restController extends Controller
         // $this->validate($request, Rest::$rules);
         $form = $request->all();
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
-        // dd($attendance);
         $form['attendance_id'] = $attendance->id;
-        // dd($form);
         Rest::create($form);
         return redirect('');
     }
