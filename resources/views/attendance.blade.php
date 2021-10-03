@@ -7,7 +7,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> -->
                 <div class="p-6 border-t border-gray-200">
-                    <form action="/attendance/start" method="post">
+                    <form action="/attendance" method="get">
                         @csrf
                         <table>
                             <tr><td><button type="submit">勤務開始</button></td></tr>
