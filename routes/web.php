@@ -5,6 +5,7 @@ use App\Http\Controllers\UserContoroller;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\RestController;
 use App\Http\Controllers\SessionController;
+use App\Models\Attendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ Route::get('/', function () {
 })->middleware(['auth'])->name('index');
 
 Route::get('/attendance', function () {
-    $items=Attendance::all();
+    $items = Attendance::all();
     return view('attendance',['items' => $items]);
 })->middleware(['auth'])->name('attendance');
 
