@@ -21,10 +21,11 @@
                             </tr>
                             @foreach($items as $item)
                                 <tr>
-                                    <td>{{$item->user_id}}</td>
+                                    <td>{{$item->id}}</td>
                                     <td>{{substr($item->start_time, 11, 8)}}</td>
                                     <td>{{substr($item->end_time, 11, 8)}}</td>
-                                    <td>{{$item->working_time}}</td>
+                                    <td>{{$item->sum_resting_time}}</td>
+                                    <!-- <td>{{$item->working_time}}</td> -->
                                     <!-- <td>{{substr($item->working_time, 11, 8)}}</td> -->
                                     <!-- <td>{{substr($item->end_time, 11, 8)}}</td> -->
                                 </tr>

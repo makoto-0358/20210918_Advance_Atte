@@ -14,6 +14,11 @@ class Rest extends Model
         'attendance_id' => 'required',
     );
 
+    // public function getRestingTimeAttribute(){
+    //     $time = strtotime($this->end_time) - strtotime($this->start_time) + strtotime('1970-01-01');
+    //     return $time;
+    // }
+
     public function Attendance(){
         return $this->belongsTo('App\Models\Attendance');
     }
