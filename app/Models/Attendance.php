@@ -40,7 +40,7 @@ class Attendance extends Model
     // }
 
     public function getWorkingTimeAttribute(){
-        $time = strtotime($this->end_time) - strtotime($this->start_time) + strtotime('1970-01-01');
+        $time = strtotime($this->end_time) - strtotime($this->start_time) - strtotime($this->sum_resting_time) + strtotime('1970-01-01');
         return date('H:i:s', $time);
     }
 
@@ -61,6 +61,10 @@ class Attendance extends Model
     //     $rest['time'] = strtotime('end_time') - strtotime('start_time') + strtotime('1970-01-01');
     //     return $rest['time'];
     // }
+        public function getNameAttribute(){
+            $user = User::where('id', $this->user_id)->first();
+            return $user->name;
+        }
 
     public function getSumRestingTimeAttribute(){
         // $sumrest = Rest::where('attendance_id', $this->id)->sum('resting_time');
@@ -200,7 +204,13 @@ class Attendance extends Model
                 foreach($rests as $rest){
                     $end = new Carbon($rest['end_time']);
                     $start = new Carbon($rest['start_time']);
+                    // if(Carbon::now('UTC')->utc){
+                    //     dd($end);
+                    // }
+                    // dd(gettype($start));
                     $rest['time'] = $end->diffInSeconds($start);
+                    // dd(gettype($rest['time']));
+                    // $rest['time']->addHours(9);
                     // dd($rest);
                     // dd($rest['time']);
                     // dd(gettype($rest['time']));
@@ -218,13 +228,34 @@ class Attendance extends Model
             // }else{
             //     $sumrest = 0;
             // }
-            $resttime = date('H:i:s', array_sum($sumrest));
+            // $resttime = date('H:i:s', array_sum($sumrest));
+            // $resttime = date('resttime', strtotime('9hours'));
             
-
             // dd(array_sum($sumrest));
+            // dd(gettype(array_sum($sumrest)));
+            // $resttimes = date('H:i:s', array_sum($sumrest));
+            // $time = (string)array_sum($sumrest);
+            // dd(gettype($time));
+            // $time = array_sum($sumrest) + strtotime('1970-01-01');
+            // dd(gettype($time));
+            // dd(gettype((string)array_sum($sumrest)));
+            // dd($time);
+            // dd(date('H:i:s', $time));
+            // return date('H:i:s', $time);
             return date('H:i:s', array_sum($sumrest));
+            // return $resttimes->modify('-9 hours');
+            // date('H:i:s', array_sum($sumrest));
+            // $resttimes = date('H:i:s', array_sum($sumrest));
+            // return date('H:i:s', strtotime('$resttimes 9 hour'));
+            // $sumresttimes = new DateTime($resttimes);
+            // return date('H:i:s', strtotime('$resttimes 9 hour'));
+            // dd($sumresttimes);
+            // $resttimes->setTimeZone(new DateTimezone('Asia/Tokyo'));
+            // dd($resttimes);
+            // return $resttimes->format(DateTime::ISO8601);
+            // date('H:i:s', $resttimes);
             // return date('H:i:s', $resttime);
-            return $resttime;
+            // return $resttime;
             
         // }
     }
