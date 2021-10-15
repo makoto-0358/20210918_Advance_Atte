@@ -13,11 +13,11 @@
                         <tr>
                         </tr>
                             <tr>
-                                <th><td>名前</td></th>
-                                <th><td>勤務開始</td></th>
-                                <th><td>勤務終了</td></th>
-                                <th><td>休憩時間</td></th>
-                                <th><td>勤務時間</td></th>
+                                <th>名前</th>
+                                <th>勤務開始</th>
+                                <th>勤務終了</th>
+                                <th>休憩時間</th>
+                                <th>勤務時間</th>
                             </tr>
                             @foreach($items as $item)
                                 <tr>
