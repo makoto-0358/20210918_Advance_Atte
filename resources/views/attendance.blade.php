@@ -10,8 +10,9 @@
                     <form action="/attendance" method="get">
                         @csrf
                         <table>
-                        <tr>
-                        </tr>
+                            <tr>
+                                {{substr(Carbon\Carbon::now(), 0, 10)}}
+                            </tr>
                             <tr>
                                 <th>名前</th>
                                 <th>勤務開始</th>
