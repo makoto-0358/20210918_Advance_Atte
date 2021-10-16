@@ -14,13 +14,10 @@ class restController extends Controller
         // 出勤中であることを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
 
-        if(empty($attendance)){
-        }elseif(!empty($attendance['end_time'])){
-        }else{
+        if(!empty($attendance) && empty($attendance['end_time'])){
             // 休憩中でないことを確認。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->first();
-            if(!empty($rest) && empty($rest['end_time'])){
-            }else{
+            if(empty($rest) || empty($rest['end_time'])){
                 $form = $request->all();
                 $form['attendance_id'] = $attendance->id;
                 Rest::create($form);
@@ -33,14 +30,10 @@ class restController extends Controller
         // 出勤中であることを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
 
-        if(empty($attendance)){
-        }elseif(!empty($attendance['end_time'])){
-        }else{
+        if(!empty($attendance) && empty($attendance['end_time'])){
             // 休憩中であることを確認。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->first();
-            if(empty($rest)){
-            }elseif(!empty($rest['end_time'])){
-            }else{
+            if(!empty($rest) && empty($rest['end_time'])){
                 $form = $request->all();
                 $form['end_time'] = now();
                 unset($form["_token"]);
