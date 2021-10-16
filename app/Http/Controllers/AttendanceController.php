@@ -26,7 +26,7 @@ class AttendanceController extends Controller
         // 出勤中であることを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
 
-        if(!empty($attendance) || empty($attendance['end_time'])){
+        if(!empty($attendance) && empty($attendance['end_time'])){
             // 休憩中でないことを確認。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->first();
             if(empty($rest) || !empty($rest['end_time'])){
