@@ -17,7 +17,7 @@ class restController extends Controller
         if(!empty($attendance) && empty($attendance['end_time'])){
             // 休憩中でないことを確認。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->first();
-            if(empty($rest) || empty($rest['end_time'])){
+            if(empty($rest) || !empty($rest['end_time'])){
                 $form = $request->all();
                 $form['attendance_id'] = $attendance->id;
                 Rest::create($form);
