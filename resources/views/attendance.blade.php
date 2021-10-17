@@ -7,11 +7,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> -->
                 <div class="p-6 border-t border-gray-200">
-                    <form action="/attendance" method="get">
+                    <form action="/attendance/{date}" method="get">
                         @csrf
                         <table>
                             <tr>
+                                <a href="/?date=前の日付">前の日</a>
                                 {{substr(Carbon\Carbon::now(), 0, 10)}}
+                                <a href="/?date=次の日"></a>
+                                <!-- https://xxx.com/attendance?date=202 -->
                             </tr>
                             <tr>
                                 <th>名前</th>
