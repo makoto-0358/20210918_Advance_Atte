@@ -27,7 +27,7 @@ Route::get('/', function () {
 })->middleware(['auth'])->name('index');
 
 Route::get('/attendance', function () {
-    $attendance = Attendance::all();
+    $attendance = Attendance::paginate(5);
     // $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->first();
     // dd($attendance);
     // $rest = Rest::all();

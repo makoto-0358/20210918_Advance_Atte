@@ -35,4 +35,5 @@
             <!-- </div> -->
         </div>
     </div>
+{{$items->links()}}
 </x-applogined-layout>
