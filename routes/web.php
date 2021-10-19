@@ -26,7 +26,7 @@ Route::get('/', function () {
     return view('index');
 })->middleware(['auth'])->name('index');
 
-Route::get('/attendance', [AttendanceController::class, 'attendance'])
+Route::get('/attendance/{date?}', [AttendanceController::class, 'attendance'])
 ->middleware(['auth'])->name('attendance');
 
 Route::post('/attendance/start', [AttendanceController::class, 'start']);
