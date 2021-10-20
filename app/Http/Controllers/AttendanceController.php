@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
+    public function index(){
+        return view('index');
+    }
+
     public function attendance(Request $request){
         // $attendance = Attendance::paginate(5);
         // dd($date);

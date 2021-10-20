@@ -22,9 +22,8 @@ use App\Models\Rest;
 Route::get('/session', [SessionController::class, 'getSes']);
 Route::post('/session', [SessionController::class, 'postSes']);
 
-Route::get('/', function () {
-    return view('index');
-})->middleware(['auth'])->name('index');
+Route::get('/', [AttendanceController::class, 'index'])
+->middleware(['auth'])->name('index');
 
 Route::get('/attendance/{date?}', [AttendanceController::class, 'attendance'])
 ->middleware(['auth'])->name('attendance');
