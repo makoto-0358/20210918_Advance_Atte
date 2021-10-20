@@ -62,6 +62,9 @@ class AttendanceController extends Controller
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
             Attendance::create($form);
+            $request->session()->flash('message', '勤務開始しました');
+        }else{
+            $request->session()->flash('message', '勤務中なので勤務開始できません');
         }
         return redirect('');
     }
@@ -77,7 +80,12 @@ class AttendanceController extends Controller
                 $form['end_time'] = now();
                 unset($form["_token"]);
                 $attendance->update($form);
+                $request->session()->flash('message', '勤務終了しました');
+            }else{
+                $request->session()->flash('message', '休憩中なので勤務終了できません');
             }
+        }else{
+            $request->session()->flash('message', '勤務開始していないため勤務終了できません');
         }
         return redirect('');
     }

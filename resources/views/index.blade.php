@@ -2,6 +2,11 @@
     <div>
         {{ Auth::user()->name }}さんお疲れ様です！
     </div>
+    @if(session('message'))
+        <div>
+            {{session('message')}}
+        </div>
+    @endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
