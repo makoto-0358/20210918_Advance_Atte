@@ -79,7 +79,7 @@ class AttendanceController extends Controller
             $request->session()->flash('message', $message);
         }
         
-        return redirect('');
+        return redirect()->route('index');
     }
     public function end(Request $request){
 
@@ -106,6 +106,6 @@ class AttendanceController extends Controller
             $request->session()->flash('message', $message);
         }
 
-        return redirect('');
+        return redirect()->route('index');
     }
 }
