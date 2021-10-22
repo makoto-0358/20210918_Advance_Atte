@@ -49,8 +49,8 @@ class AttendanceController extends Controller
         $data = [
             'items' => $attendance,
             'date' => date('Ymd', strtotime($date)),
-            'beforedate' => date('Y-m-d', strtotime("$request->date -1 day")),
-            'afterdate' => date('Y-m-d', strtotime("$request->date +1 day")),
+            'beforedate' => date('Y-m-d', strtotime("$date -1 day")),
+            'afterdate' => date('Y-m-d', strtotime("$date +1 day")),
         ];
         // dd($data);
 
