@@ -24,7 +24,7 @@ class AttendanceController extends Controller
             // dd($date);
             list($Y, $m, $d) = explode('-', $date);
             if(checkdate($m, $d, $Y) != true){
-                return view('attendance');
+                return redirect()->route('attendance');
             }
         }
         // dd($date);
