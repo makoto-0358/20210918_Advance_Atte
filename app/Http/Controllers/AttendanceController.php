@@ -65,20 +65,27 @@ class AttendanceController extends Controller
 
         // 出勤中でないことを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
+        $message = '';
         if(!isset($attendance)){
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
             Attendance::create($form);
-            $request->session()->flash('message', '勤務開始しました');
+            $message = '勤務開始しました';
         }else{
-            $request->session()->flash('message', '勤務中なので勤務開始できません');
+            $message = '勤務中なので勤務開始できません';
         }
+
+        if(!empty($message)){
+            $request->session()->flash('message', $message);
+        }
+        
         return redirect('');
     }
     public function end(Request $request){
 
         // 出勤中であることを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
+        $message = '';
         if(isset($attendance)){
             // 休憩中でないことを確認。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
@@ -87,13 +94,18 @@ class AttendanceController extends Controller
                 $form['end_time'] = now();
                 unset($form["_token"]);
                 $attendance->update($form);
-                $request->session()->flash('message', '勤務終了しました');
+                $message = '勤務終了しました';
             }else{
-                $request->session()->flash('message', '休憩中なので勤務終了できません');
+                $message = '休憩中なので勤務終了できません';
             }
         }else{
-            $request->session()->flash('message', '勤務開始していないため勤務終了できません');
+            $message = '勤務開始していないため勤務終了できません';
         }
+
+        if(!empty($message)){
+            $request->session()->flash('message', $message);
+        }
+
         return redirect('');
     }
 }

@@ -13,6 +13,7 @@ class restController extends Controller
 
         // 出勤中であることを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
+        $message = '';
         if(isset($attendance)){
             // 休憩中でないことを確認。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
@@ -20,19 +21,25 @@ class restController extends Controller
                 $form = $request->all();
                 $form['attendance_id'] = $attendance->id;
                 Rest::create($form);
-                $request->session()->flash('message', '休憩開始しました');
+                $message = '休憩開始しました';
             }else{
-                $request->session()->flash('message', '休憩中なので休憩開始できません');
+                $message = '休憩中なので休憩開始できません';
             }
         }else{
-            $request->session()->flash('message', '勤務開始していないため休憩開始できません');
+            $message = '勤務開始していないため休憩開始できません';
         }
+
+        if(!empty($message)){
+            $request->session()->flash('message', $message);
+        }
+
         return redirect('');
     }
     public function end(Request $request){
 
         // 出勤中であることを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
+        $message = '';
         if(isset($attendance)){
             // 休憩中であることを確認。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
@@ -41,13 +48,18 @@ class restController extends Controller
                 $form['end_time'] = now();
                 unset($form["_token"]);
                 $rest->update($form);
-                $request->session()->flash('message', '休憩終了しました');
+                $message = '休憩終了しました';
             }else{
-                $request->session()->flash('message', '休憩中ではないので休憩終了できません');
+                $message = '休憩中ではないので休憩終了できません';
             }
         }else{
-            $request->session()->flash('message', '勤務開始していないため休憩終了できません');
+            $message = '勤務開始していないため休憩終了できません';
         }
+
+        if(!empty($message)){
+            $request->session()->flash('message', $message);
+        }
+
         return redirect('');
     }
 }
