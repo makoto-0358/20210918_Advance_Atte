@@ -46,12 +46,6 @@ class AttendanceController extends Controller
         $attendance = Attendance::where('start_time', 'like', "$date%")->paginate(5);
         // dd($attendance);
         // $attendance = Attendance::paginate(5);
-        $data = [
-            'items' => $attendance,
-            'date' => date('Ymd', strtotime($date)),
-            'beforedate' => date('Y-m-d', strtotime("$date -1 day")),
-            'afterdate' => date('Y-m-d', strtotime("$date +1 day")),
-        ];
         // dd($data);
 
         // //前日と、翌日の日付を取得
@@ -59,7 +53,12 @@ class AttendanceController extends Controller
         // $prevDate = new Date($date, strtotime('-1 day'));
 
         // return view('attendance', [$nestDate, $prevDate, $attendance->paginate(5)]);
-        return view('attendance', $data);
+        return view('attendance', [
+            'items' => $attendance,
+            'date' => date('Ymd', strtotime($date)),
+            'beforedate' => date('Y-m-d', strtotime("$date -1 day")),
+            'afterdate' => date('Y-m-d', strtotime("$date +1 day")),
+        ]);
     }
 
     public function start(Request $request){
