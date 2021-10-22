@@ -28,9 +28,13 @@ Route::get('/', [AttendanceController::class, 'index'])
 Route::get('/attendance/{date?}', [AttendanceController::class, 'attendance'])
 ->middleware(['auth'])->name('attendance');
 
-Route::post('/attendance/start', [AttendanceController::class, 'start']);
-Route::post('/attendance/end', [AttendanceController::class, 'end']);
-Route::post('/rest/start', [RestController::class, 'start']);
-Route::post('/rest/end', [RestController::class, 'end']);
+Route::post('/attendance/start', [AttendanceController::class, 'start'])
+->middleware(['auth']);
+Route::post('/attendance/end', [AttendanceController::class, 'end'])
+->middleware(['auth']);
+Route::post('/rest/start', [RestController::class, 'start'])
+->middleware(['auth']);
+Route::post('/rest/end', [RestController::class, 'end'])
+->middleware(['auth']);
 
 require __DIR__.'/auth.php';
