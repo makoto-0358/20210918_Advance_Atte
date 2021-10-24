@@ -10,7 +10,19 @@ use Illuminate\Http\Request;
 class AttendanceController extends Controller
 {
     public function index(){
-        return view('index');
+
+        $rest = '';
+        $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
+        // dd($attendance);
+
+        if(isset($attendance)){
+            $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
+        }
+
+        return view('index', [
+            $attendance,
+            $rest
+        ]);
     }
 
     public function attendance(Request $request){
@@ -63,6 +75,7 @@ class AttendanceController extends Controller
 
     public function start(Request $request){
 
+        $rest = '';
         // 出勤中でないことを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
         $message = '';
@@ -79,7 +92,10 @@ class AttendanceController extends Controller
             $request->session()->flash('message', $message);
         }
         
-        return redirect()->route('index');
+        return redirect()->route('index', [
+            $attendance,
+            $rest
+        ]);
     }
     public function end(Request $request){
 
@@ -106,6 +122,9 @@ class AttendanceController extends Controller
             $request->session()->flash('message', $message);
         }
 
-        return redirect()->route('index');
+        return redirect()->route('index', [
+            $attendance,
+            $rest
+        ]);
     }
 }

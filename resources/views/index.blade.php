@@ -15,7 +15,11 @@
                     <form action="/attendance/start" method="post">
                         @csrf
                         <table>
-                            <tr><td><button type="submit">勤務開始</button></td></tr>
+                        @isset($attendance)
+                            <tr><td><button type="submit">勤務開始できない</button></td></tr>
+                        @else
+                            <tr><td><button type="submit">勤務開始できる</button></td></tr>
+                        @endisset
                         </table>
                     </form>
                 </div>
@@ -27,7 +31,13 @@
                     <form action="/attendance/end" method="post">
                         @csrf
                         <table>
-                            <tr><td><button type="submit">勤務終了</button></td></tr>
+                        @isset($attendance)
+                            @empty($rest)
+                                <tr><td><button type="submit">勤務終了できる</button></td></tr>
+                            @endempty
+                        @else
+                            <tr><td><button type="submit">勤務終了できない</button></td></tr>
+                        @endisset
                         </table>
                     </form>
                 </div>
@@ -39,7 +49,13 @@
                     <form action="/rest/start" method="post">
                         @csrf
                         <table>
-                            <tr><td><button type="submit">休憩開始</button></td></tr>
+                        @isset($attendance)
+                            @empty($rest)
+                                <tr><td><button type="submit">休憩開始できる</button></td></tr>
+                            @endisset
+                        @else
+                            <tr><td><button type="submit">休憩開始できない</button></td></tr>
+                        @endisset
                         </table>
                     </form>
                 </div>
@@ -51,7 +67,13 @@
                     <form action="/rest/end" method="post">
                         @csrf
                         <table>
-                            <tr><td><button type="submit">休憩終了</button></td></tr>
+                        @isset($attendance)
+                            @isset($rest)
+                                <tr><td><button type="submit">休憩終了できる</button></td></tr>
+                            @endisset
+                        @else
+                            <tr><td><button type="submit">休憩終了できない</button></td></tr>
+                        @endisset
                         </table>
                     </form>
                 </div>
