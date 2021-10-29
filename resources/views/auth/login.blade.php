@@ -1,4 +1,4 @@
-<x-applogouted-layout>
+<x-applogin-layout>
     <x-auth-card>
         <x-slot name="logo">
             ログイン
@@ -43,4 +43,4 @@
             </div>
         </form>
     </x-auth-card>
-</x-applogouted-layout>
+</x-applogin-layout>
