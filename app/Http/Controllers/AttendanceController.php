@@ -35,11 +35,8 @@ class AttendanceController extends Controller
                 return redirect()->route('attendance');
             }
         }
-        // ローカルの時 
-        // $date = date('Y-m-d', strtotime($date));
 
-        // Herokuの時
-        $date = date('Y-m-d', strtotime($date + strtotime('1970-01-01')));
+        $date = date('Y-m-d', strtotime($date));
 
         $attendance = Attendance::where('start_time', 'like', "$date%")->paginate(5);
 
