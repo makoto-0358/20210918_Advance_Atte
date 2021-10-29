@@ -1,4 +1,4 @@
-<x-applogined-layout>
+<x-appmember-layout>
     <div>
         {{ Auth::user()->name }}さんお疲れ様です！
     </div>
@@ -35,4 +35,4 @@
         </div>
     </div>
 {{$items->links()}}
-</x-applogined-layout>
+</x-appmember-layout>
