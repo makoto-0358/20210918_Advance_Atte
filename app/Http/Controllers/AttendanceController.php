@@ -36,7 +36,7 @@ class AttendanceController extends Controller
             }
         }
 
-        $date = date('Y-m-d', strtotime($date));
+        // $date = date('Y-m-d', strtotime($date));
 
         $attendance = Attendance::where('start_time', 'like', "$date%")->paginate(5);
 
@@ -57,6 +57,7 @@ class AttendanceController extends Controller
         if(!isset($attendance)){
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
+            $form['start_time'] = now();
             Attendance::create($form);
             $message = '勤務開始しました';
         }else{
