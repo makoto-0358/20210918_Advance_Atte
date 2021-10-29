@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class ApploginLayout extends Component
+class AppguestLayout extends Component
 {
     /**
      * Get the view / contents that represents the component.
@@ -13,6 +13,6 @@ class ApploginLayout extends Component
      */
     public function render()
     {
-        return view('layouts.applogin');
+        return view('layouts.appguest');
     }
 }
