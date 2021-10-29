@@ -13,7 +13,6 @@ class AttendanceController extends Controller
 
         $rest = '';
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
-        // dd($attendance);
 
         if(isset($attendance)){
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
@@ -26,45 +25,24 @@ class AttendanceController extends Controller
     }
 
     public function attendance(Request $request){
-        // $attendance = Attendance::paginate(5);
-        // dd($date);
-        // $date = substr(now(), 0, 10);
+
         $date = now();
-        // dd($date);
+
         if(isset($request->date)){
             $date = $request->date;
-            // dd($date);
             list($Y, $m, $d) = explode('-', $date);
             if(checkdate($m, $d, $Y) != true){
                 return redirect()->route('attendance');
             }
         }
-        // dd($date);
-        // $date = strtotime($date);
-        // $date = substr(date('Y-m-d', $date), 0, 10);
-        // dd($date);
-        $date = date('Y-m-d', strtotime($date));
-        // dd($date);
-        // $requestにdateパラメータが存在するか
-        // $date = new Date(); //本日の日付を指定
-        // if(isset($request->date)){
-        //     //有効日付チェックをする
+        // ローカルの時 
+        // $date = date('Y-m-d', strtotime($date));
 
-        //     //上書く
-        // //     $date = new Date($request->date);
-        // }
+        // Herokuの時
+        $date = date('Y-m-d', strtotime($date + strtotime('1970-01-01')));
 
-        //$dateを先に
         $attendance = Attendance::where('start_time', 'like', "$date%")->paginate(5);
-        // dd($attendance);
-        // $attendance = Attendance::paginate(5);
-        // dd($data);
 
-        // //前日と、翌日の日付を取得
-        // $nextDate = new Date($date, strtotime('+1 day'));
-        // $prevDate = new Date($date, strtotime('-1 day'));
-
-        // return view('attendance', [$nestDate, $prevDate, $attendance->paginate(5)]);
         return view('attendance', [
             'items' => $attendance,
             'date' => date('Ymd', strtotime($date)),
