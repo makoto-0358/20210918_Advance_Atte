@@ -58,10 +58,10 @@ class AttendanceController extends Controller
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
             // dd($request->date);　nullが返ってきた。
-            // $form['start_time'] = now();
+            $form['start_time'] = now();
             Attendance::create($form);
             // dd(Attendance::create($form));　start_timeは存在しなかった。
-            dd($attendance);
+            // dd($attendance);　nullが返ってきた(当然。。)。
             $message = '勤務開始しました';
         }else{
             $message = '勤務中なので勤務開始できません';
@@ -71,10 +71,7 @@ class AttendanceController extends Controller
             $request->session()->flash('message', $message);
         }
         
-        return redirect()->route('index', [
-            $attendance,
-            $rest
-        ]);
+        return redirect()->route('index');
     }
     public function end(Request $request){
 
@@ -101,9 +98,6 @@ class AttendanceController extends Controller
             $request->session()->flash('message', $message);
         }
 
-        return redirect()->route('index', [
-            $attendance,
-            $rest
-        ]);
+        return redirect()->route('index');
     }
 }

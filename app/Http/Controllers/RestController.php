@@ -34,10 +34,7 @@ class restController extends Controller
             $request->session()->flash('message', $message);
         }
 
-        return redirect()->route('index', [
-            $attendance,
-            $rest
-        ]);
+        return redirect()->route('index');
     }
     public function end(Request $request){
 
@@ -64,9 +61,6 @@ class restController extends Controller
             $request->session()->flash('message', $message);
         }
 
-        return redirect()->route('index', [
-            $attendance,
-            $rest
-        ]);
+        return redirect()->route('index');
     }
 }
