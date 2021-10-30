@@ -24,7 +24,7 @@ class AttendanceController extends Controller
         ]);
     }
 
-    public function attendance($date, Request $request){
+    public function attendance(Request $request){
 
         $date = now();
         $date = date('Y-m-d', strtotime($date));
