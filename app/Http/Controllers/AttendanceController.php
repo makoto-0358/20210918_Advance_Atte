@@ -57,10 +57,11 @@ class AttendanceController extends Controller
         if(!isset($attendance)){
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
-            // dd($request->date);　結果的にはnullが返ってきた。
+            // dd($request->date);　nullが返ってきた。
             // $form['start_time'] = now();
             Attendance::create($form);
-            dd(Attendance::create($form));
+            // dd(Attendance::create($form));　start_timeは存在しなかった。
+            dd($attendance);
             $message = '勤務開始しました';
         }else{
             $message = '勤務中なので勤務開始できません';
