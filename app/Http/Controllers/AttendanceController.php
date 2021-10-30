@@ -57,6 +57,7 @@ class AttendanceController extends Controller
         if(!isset($attendance)){
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
+            dd($form);
             $form['start_time'] = now();
             Attendance::create($form);
             $message = '勤務開始しました';
