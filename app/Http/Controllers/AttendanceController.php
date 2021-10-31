@@ -59,7 +59,7 @@ class AttendanceController extends Controller
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
             // dd($request->date);　nullが返ってきた。
-            // $form['start_time'] = now();
+            $form['start_time'] = now();
             Attendance::create($form);
             // dd(Attendance::create($form));　start_timeは存在しなかった。
             // dd($attendance);　nullが返ってきた(当然。。)。

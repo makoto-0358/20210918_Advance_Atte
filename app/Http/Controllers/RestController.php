@@ -20,7 +20,7 @@ class restController extends Controller
             if(!isset($rest)){
                 $form = $request->all();
                 $form['attendance_id'] = $attendance->id;
-                // $form['start_time'] = now();
+                $form['start_time'] = now();
                 Rest::create($form);
                 $message = '休憩開始しました';
             }else{

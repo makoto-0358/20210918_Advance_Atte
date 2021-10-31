@@ -17,7 +17,7 @@ class CreateRestsTable extends Migration
             $table->id('id');
             $table->unsignedBigInteger('attendance_id');
             $table->foreign('attendance_id')->references('id')->on('attendances')->onUpdate('CASCADE')->nullable();
-            $table->timestamp('start_time')->nullable();
+            $table->timestamp('start_time')->useCurrent()->nullable();
             $table->timestamp('end_time')->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->nullable();
