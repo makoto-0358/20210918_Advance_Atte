@@ -12,70 +12,76 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="/attendance/start" method="post">
-                        @csrf
-                        <table>
+                    <table>
                         @isset($attendance)
-                            <tr><td><button type="submit">勤務開始できない</button></td></tr>
+                            <tr><td>勤務開始できない</td></tr>
                         @else
+                        <form action="/attendance/start" method="post">
+                            @csrf
                             <tr><td><button type="submit">勤務開始できる</button></td></tr>
+                        </form>
                         @endisset
-                        </table>
-                    </form>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="/attendance/end" method="post">
-                        @csrf
-                        <table>
+                    <table>
                         @isset($attendance)
                             @empty($rest)
+                            <form action="/attendance/end" method="post">
+                                @csrf
                                 <tr><td><button type="submit">勤務終了できる</button></td></tr>
+                            </form>
+                            @else
+                            <tr><td>勤務終了できない</td></tr>
                             @endempty
                         @else
-                            <tr><td><button type="submit">勤務終了できない</button></td></tr>
+                        <tr><td>勤務終了できない</td></tr>
                         @endisset
-                        </table>
-                    </form>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="/rest/start" method="post">
-                        @csrf
-                        <table>
+                    <table>
                         @isset($attendance)
                             @empty($rest)
+                            <form action="/rest/start" method="post">
+                                @csrf
                                 <tr><td><button type="submit">休憩開始できる</button></td></tr>
-                            @endisset
+                            </form>
+                            @else
+                            <tr><td>休憩開始できない</td></tr>
+                            @endempty
                         @else
-                            <tr><td><button type="submit">休憩開始できない</button></td></tr>
+                        <tr><td>休憩開始できない</td></tr>
                         @endisset
-                        </table>
-                    </form>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="/rest/end" method="post">
-                        @csrf
-                        <table>
+                    <table>
                         @isset($attendance)
                             @isset($rest)
+                            <form action="/rest/end" method="post">
+                                @csrf
                                 <tr><td><button type="submit">休憩終了できる</button></td></tr>
+                            </form>
+                            @else
+                            <tr><td>休憩終了できない</td></tr>
                             @endisset
                         @else
-                            <tr><td><button type="submit">休憩終了できない</button></td></tr>
+                        <tr><td>休憩終了できない</td></tr>
                         @endisset
-                        </table>
-                    </form>
+                    </table>
                 </div>
             </div>
         </div>

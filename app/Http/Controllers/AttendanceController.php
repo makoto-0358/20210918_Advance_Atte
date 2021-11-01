@@ -18,10 +18,7 @@ class AttendanceController extends Controller
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
         }
 
-        return view('index', [
-            $attendance,
-            $rest
-        ]);
+        return view('index', compact('attendance', 'rest'));
     }
 
     public function attendance(Request $request){
