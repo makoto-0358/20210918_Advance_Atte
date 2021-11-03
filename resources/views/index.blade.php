@@ -2,6 +2,18 @@
     <div>
         {{ Auth::user()->name }}さんお疲れ様です！
     </div>
+    <div>
+        @isset($attendance)
+        勤務中です。
+            @isset($rest)
+            休憩中です。
+            @else
+            休憩中ではありません。
+            @endisset
+        @else
+        勤務中ではありません。
+        @endisset
+    </div>
     @if(session('message'))
         <div>
             {{session('message')}}
