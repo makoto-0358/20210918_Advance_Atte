@@ -31,16 +31,30 @@
                                 required autocomplete="current-password" />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
-                    {{ __('Register') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
+            <div class="flex items-center justify-center mt-4">
+                <table>
+                    <tr>
+                        <td class="flex justify-center">
+                            <x-button class="ml-3">
+                                {{ __('Log in') }}
+                            </x-button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            アカウントをお持ちでない方はこちらから
+                        </td>
+                    </tr>
+                    @if (Route::has('password.request'))
+                    <tr>
+                        <td>
+                            <a class="flex justify-center text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                                {{ __('Register') }}
+                            </a>
+                        </td>
+                    </tr>
+                    @endif
+                </table>
             </div>
         </form>
     </x-auth-card>

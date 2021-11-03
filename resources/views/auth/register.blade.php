@@ -45,15 +45,28 @@
                                 name="password_confirmation" required />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <p>アカウントをお持ちの方はこちらから</p>
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
+            <div class="flex items-center justify-center mt-4">
+                <table>
+                    <tr>
+                        <td class="flex justify-center">
+                            <x-button class="ml-4">
+                                {{ __('Register') }}
+                            </x-button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            アカウントをお持ちの方はこちらから
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a class="flex justify-center text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                                {{ __('Already registered?') }}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </form>
     </x-auth-card>
