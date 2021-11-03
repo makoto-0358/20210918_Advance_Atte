@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-appguest-layout>
     <x-auth-card>
         <x-slot name="logo">
             会員登録
@@ -55,4 +55,4 @@
             </div>
         </form>
     </x-auth-card>
-</x-guest-layout>
+</x-appguest-layout>
