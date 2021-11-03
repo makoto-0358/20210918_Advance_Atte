@@ -18,12 +18,15 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigationlogin')
+            @include('layouts.navigationloginhead')
 
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
         </div>
+        <footer>
+            @include('layouts.navigationfoot')
+        </footer>
     </body>
 </html>

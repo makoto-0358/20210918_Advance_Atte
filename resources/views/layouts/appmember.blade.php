@@ -25,5 +25,8 @@
                 {{ $slot }}
             </main>
         </div>
+        <footer>
+            @include('layouts.navigationfoot')
+        </footer>
     </body>
 </html>
