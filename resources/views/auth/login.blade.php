@@ -17,7 +17,7 @@
             <div>
                 <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-input id="email" class="block mt-1 w-full" type="email" placeholder="メールアドレス" name="email" :value="old('email')" required autofocus />
             </div>
 
             <!-- Password -->
@@ -26,6 +26,7 @@
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
+                                placeholder="パスワード"
                                 name="password"
                                 required autocomplete="current-password" />
             </div>
