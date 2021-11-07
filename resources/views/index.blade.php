@@ -1,5 +1,5 @@
 <x-appmember-layout>
-    <div class="flex justify-center">
+    <div class="py-10 flex justify-center text-2xl font-bold">
         {{ Auth::user()->name }}さんお疲れ様です！
     </div>
     <div class="flex justify-center">
@@ -20,17 +20,17 @@
         </div>
     @endif
 
-    <div class="py-12 flex flex-wrap mx-40">
+    <div class="py-12 flex flex-wrap mx-40 text-2xl">
         <div class="w-5/12 mx-auto my-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="py-20 px-50 bg-white border-b border-gray-200">
                     <table class="flex item-center justify-center">
                         @isset($attendance)
-                            <tr><td>勤務開始</td></tr>
+                            <tr><td class="font-bold text-gray-400">勤務開始</td></tr>
                         @else
                         <form action="/attendance/start" method="post">
                             @csrf
-                            <tr><td><button type="submit">勤務開始</button></td></tr>
+                            <tr><td><button class="font-bold" type="submit">勤務開始</button></td></tr>
                         </form>
                         @endisset
                     </table>
@@ -45,13 +45,13 @@
                             @empty($rest)
                             <form action="/attendance/end" method="post">
                                 @csrf
-                                <tr><td><button type="submit">勤務終了</button></td></tr>
+                                <tr><td><button class="font-bold" type="submit">勤務終了</button></td></tr>
                             </form>
                             @else
-                            <tr><td>勤務終了</td></tr>
+                            <tr><td class="font-bold text-gray-400">勤務終了</td></tr>
                             @endempty
                         @else
-                        <tr><td>勤務終了</td></tr>
+                        <tr><td class="font-bold text-gray-400">勤務終了</td></tr>
                         @endisset
                     </table>
                 </div>
@@ -65,13 +65,13 @@
                             @empty($rest)
                             <form action="/rest/start" method="post">
                                 @csrf
-                                <tr><td><button type="submit">休憩開始</button></td></tr>
+                                <tr><td><button class="font-bold" type="submit">休憩開始</button></td></tr>
                             </form>
                             @else
-                            <tr><td>休憩開始</td></tr>
+                            <tr><td class="font-bold text-gray-400">休憩開始</td></tr>
                             @endempty
                         @else
-                        <tr><td>休憩開始</td></tr>
+                        <tr><td class="font-bold text-gray-400">休憩開始</td></tr>
                         @endisset
                     </table>
                 </div>
@@ -85,13 +85,13 @@
                             @isset($rest)
                             <form action="/rest/end" method="post">
                                 @csrf
-                                <tr><td><button type="submit">休憩終了</button></td></tr>
+                                <tr><td><button class="font-bold" type="submit">休憩終了</button></td></tr>
                             </form>
                             @else
-                            <tr><td>休憩終了</td></tr>
+                            <tr><td class="font-bold text-gray-400">休憩終了</td></tr>
                             @endisset
                         @else
-                        <tr><td>休憩終了</td></tr>
+                        <tr><td class="font-bold text-gray-400">休憩終了</td></tr>
                         @endisset
                     </table>
                 </div>
