@@ -12,11 +12,11 @@
             <div class="flex">
                 <!-- Links -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{route('index')}}">ホーム</a>
-                    <a href="{{route('attendance')}}">日付一覧</a>
+                    <a class="m-6 font-bold" href="{{route('index')}}">ホーム</a>
+                    <a class="m-6 font-bold" href="{{route('attendance')}}">日付一覧</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a href="route('logout')"
+                        <a class="m-6 font-bold" href="route('logout')"
                             onclick="event.preventDefault();
                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}
