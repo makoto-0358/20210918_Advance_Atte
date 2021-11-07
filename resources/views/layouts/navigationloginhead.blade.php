@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Atte -->
                 <div class="flex-shrink-0 flex items-center">
-                    <p>Atte</p>
+                    <p class="text-3xl font-bold">Atte</p>
                 </div>
             </div>
         </div>
