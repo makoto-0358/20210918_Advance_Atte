@@ -1,8 +1,8 @@
 <x-appmember-layout>
-    <div>
+    <div class="flex justify-center">
         {{ Auth::user()->name }}さんお疲れ様です！
     </div>
-    <div>
+    <div class="flex justify-center">
         @isset($attendance)
         勤務中です。
             @isset($rest)
@@ -20,78 +20,78 @@
         </div>
     @endif
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-12 flex flex-wrap mx-40">
+        <div class="w-5/12 mx-auto my-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <table>
+                <div class="py-20 px-50 bg-white border-b border-gray-200">
+                    <table class="flex item-center justify-center">
                         @isset($attendance)
-                            <tr><td>勤務開始できない</td></tr>
+                            <tr><td>勤務開始</td></tr>
                         @else
                         <form action="/attendance/start" method="post">
                             @csrf
-                            <tr><td><button type="submit">勤務開始できる</button></td></tr>
+                            <tr><td><button type="submit">勤務開始</button></td></tr>
                         </form>
                         @endisset
                     </table>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="w-5/12 mx-auto my-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <table>
+                <div class="py-20 px-50 bg-white border-b border-gray-200">
+                    <table class="flex item-center justify-center">
                         @isset($attendance)
                             @empty($rest)
                             <form action="/attendance/end" method="post">
                                 @csrf
-                                <tr><td><button type="submit">勤務終了できる</button></td></tr>
+                                <tr><td><button type="submit">勤務終了</button></td></tr>
                             </form>
                             @else
-                            <tr><td>勤務終了できない</td></tr>
+                            <tr><td>勤務終了</td></tr>
                             @endempty
                         @else
-                        <tr><td>勤務終了できない</td></tr>
+                        <tr><td>勤務終了</td></tr>
                         @endisset
                     </table>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="w-5/12 mx-auto my-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <table>
+                <div class="py-20 px-50 bg-white border-b border-gray-200">
+                    <table class="flex item-center justify-center">
                         @isset($attendance)
                             @empty($rest)
                             <form action="/rest/start" method="post">
                                 @csrf
-                                <tr><td><button type="submit">休憩開始できる</button></td></tr>
+                                <tr><td><button type="submit">休憩開始</button></td></tr>
                             </form>
                             @else
-                            <tr><td>休憩開始できない</td></tr>
+                            <tr><td>休憩開始</td></tr>
                             @endempty
                         @else
-                        <tr><td>休憩開始できない</td></tr>
+                        <tr><td>休憩開始</td></tr>
                         @endisset
                     </table>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="w-5/12 mx-auto my-6">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <table>
+                <div class="py-20 px-50 bg-white border-b border-gray-200">
+                    <table class="flex item-center justify-center">
                         @isset($attendance)
                             @isset($rest)
                             <form action="/rest/end" method="post">
                                 @csrf
-                                <tr><td><button type="submit">休憩終了できる</button></td></tr>
+                                <tr><td><button type="submit">休憩終了</button></td></tr>
                             </form>
                             @else
-                            <tr><td>休憩終了できない</td></tr>
+                            <tr><td>休憩終了</td></tr>
                             @endisset
                         @else
-                        <tr><td>休憩終了できない</td></tr>
+                        <tr><td>休憩終了</td></tr>
                         @endisset
                     </table>
                 </div>
