@@ -16,6 +16,8 @@ module.exports = {
     },
 
     variants: {
+        backgroundColor: ({ before }) => before(['active']),
+        backgroundColor: ({ after }) => after(['active']),
         extend: {
             opacity: ['disabled'],
         },
