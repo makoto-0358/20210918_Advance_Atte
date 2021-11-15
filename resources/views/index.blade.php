@@ -14,11 +14,11 @@
         勤務中ではありません。
         @endisset
     </div>
-    @if(session('message'))
-        <div>
+    <!-- @if(session('message'))
+        <div class="w-full text-center bg-green-200 bg-opacity-75 absolute top-0 transition-all　duration-1000 transform translate-y-64">
             {{session('message')}}
         </div>
-    @endif
+    @endif -->
 
     <div class="py-12 flex flex-wrap mx-40 text-2xl">
         <div class="w-5/12 mx-auto my-6">
