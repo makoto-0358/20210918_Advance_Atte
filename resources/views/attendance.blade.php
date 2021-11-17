@@ -20,7 +20,7 @@
                             </a>
                         </div>
                     <!-- </div> -->
-                    <table class="w-4/5 mx-auto flex justify-center">
+                    <table class="w-4/5 mx-auto flex justify-center overflow-auto">
                         <tr class="flex flex-no-wrap border-t-2 border-gray-400">
                             <th class="w-56 h-12 flex justify-center items-center">名前</th>
                             <th class="w-56 h-12 flex justify-center items-center">勤務開始</th>
