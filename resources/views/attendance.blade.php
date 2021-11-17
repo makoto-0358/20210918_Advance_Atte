@@ -30,11 +30,11 @@
                         </tr>
                         @foreach($items as $item)
                             <tr class="flex content-between border-t-2 border-gray-400">
-                                <td class="w-24 h-12 flex justify-center items-center md:w-56">{{$item->name}}</td>
-                                <td class="w-24 h-12 flex justify-center items-center md:w-56">{{substr($item->start_time, 11, 8)}}</td>
-                                <td class="w-24 h-12 flex justify-center items-center md:w-56">{{substr($item->end_time, 11, 8)}}</td>
-                                <td class="w-24 h-12 flex justify-center items-center md:w-56">{{$item->sum_resting_time}}</td>
-                                <td class="w-24 h-12 flex justify-center items-center md:w-56">{{$item->working_time}}</td>
+                                <td class="w-24 min-h-100% flex justify-center items-center md:w-56">{{$item->name}}</td>
+                                <td class="w-24 min-h-100% flex justify-center items-center md:w-56">{{substr($item->start_time, 11, 8)}}</td>
+                                <td class="w-24 min-h-100% flex justify-center items-center md:w-56">{{substr($item->end_time, 11, 8)}}</td>
+                                <td class="w-24 min-h-100% flex justify-center items-center md:w-56">{{$item->sum_resting_time}}</td>
+                                <td class="w-24 min-h-100% flex justify-center items-center md:w-56">{{$item->working_time}}</td>
                             </tr>
                         @endforeach
                     </table>
