@@ -1,17 +1,17 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+        <div class="flex justify-center md:justify-between py-0 flex-col md:flex-row">
+            <!-- <div class="flex"> -->
                 <!-- Atte -->
-                <div class="flex-shrink-0 flex items-center">
-                    <p class="text-3xl font-bold">Atte</p>
+                <div class="flex items-center justify-center text-3xl font-bold">Atte
+                    <!-- <p class="text-3xl font-bold">Atte</p> -->
                 </div>
-            </div>
+            <!-- </div> -->
 
-            <div class="flex">
+            <!-- <div class="flex"> -->
                 <!-- Links -->
-                <div class="flex-shrink-0 flex items-center">
+                <div class="flex-shrink-0 flex items-center justify-center">
                     <a class="m-2 font-bold md:m-6" href="{{route('index')}}">ホーム</a>
                     <a class="m-2 font-bold md:m-6" href="{{route('attendance')}}">日付一覧</a>
                     <form method="POST" action="{{ route('logout') }}">
@@ -23,7 +23,7 @@
                         </a>
                     </form>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 </nav>
