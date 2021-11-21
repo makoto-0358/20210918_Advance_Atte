@@ -1,7 +1,8 @@
 <x-appmember-layout>
     <!-- 日付関係 -->
-    <!-- 前の日への矢印 -->
     <div class="flex justify-center items-center my-12">
+
+        <!-- 前の日への矢印 -->
         <a href="/attendance/{{$beforedate}}">
             <div class="mx-8 w-12 h-8 bg-white border-2 rounded border-solid border-blue-400 relative">
                 <div class="absolute mt-3 ml-2 w-6 h-0 box-border border-t-2 border-solid border-blue-400 transform origin-left -rotate-12"></div>
