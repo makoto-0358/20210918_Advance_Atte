@@ -24,7 +24,7 @@
         <div class="w-5/12 mx-auto my-6">
             <div class="bg-white overflow-hidden shadow-sm">
                 @isset($attendance)
-                    <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                    <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-default md:py-20">
                         <div class="font-bold text-gray-400">勤務開始</div>
                     </div>
                 @else
@@ -46,18 +46,18 @@
                     <form action="/attendance/end" method="post">
                         @csrf
                         <label>
-                            <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                            <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer cursor-default md:py-20">
                                 <button class="font-bold" type="submit">勤務終了</button>
                             </div>
                         </label>
                     </form>
                     @else
-                    <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                    <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-default md:py-20">
                         <div class="font-bold text-gray-400">勤務終了</div>
                     </div>
                     @endempty
                 @else
-                <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-default md:py-20">
                     <div class="font-bold text-gray-400">勤務終了</div>
                 </div>
                 @endisset
@@ -76,12 +76,12 @@
                         </label>
                     </form>
                     @else
-                    <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                    <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-default md:py-20">
                         <div class="font-bold text-gray-400">休憩開始</div>
                     </div>
                     @endempty
                 @else
-                <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-default md:py-20">
                     <div class="font-bold text-gray-400">休憩開始</div>
                 </div>
                 @endisset
@@ -100,12 +100,12 @@
                         </label>
                     </form>
                     @else
-                    <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                    <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-default md:py-20">
                         <div class="font-bold text-gray-400">休憩終了</div>
                     </div>
                     @endisset
                 @else
-                <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-default md:py-20">
                     <div class="font-bold text-gray-400">休憩終了</div>
                 </div>
                 @endisset
