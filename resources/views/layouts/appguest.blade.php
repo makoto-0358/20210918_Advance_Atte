@@ -26,7 +26,7 @@
             </main>
         </div>
         <footer>
-            @include('layouts.navigationfoot')
+            @include('layouts.footer')
         </footer>
     </body>
 </html>
