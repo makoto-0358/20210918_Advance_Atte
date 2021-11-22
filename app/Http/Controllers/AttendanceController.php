@@ -11,9 +11,13 @@ class AttendanceController extends Controller
 {
     public function index(){
 
+        // 休憩レコードを空として定義しておく。
         $rest = '';
+
+        // 出勤中レコードの定義。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
 
+        // 出勤中の場合、休憩中レコードを上書きする。
         if(isset($attendance)){
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
         }
@@ -21,11 +25,14 @@ class AttendanceController extends Controller
         return view('index', compact('attendance', 'rest'));
     }
 
+    // 日付別勤怠ページ
     public function attendance(Request $request){
 
+        // 年月日情報が渡されていない場合、現在年月日で表示する。
         $date = now();
         $date = date('Y-m-d', strtotime($date));
 
+        // 年月日情報が渡された場合は、渡された年月日で表示する。
         if(isset($request->date)){
             $date = $request->date;
             list($Y, $m, $d) = explode('-', $date);
@@ -34,8 +41,7 @@ class AttendanceController extends Controller
             }
         }
 
-        // $date = date('Y-m-d', strtotime($date));
-
+        // 該当年月日における出勤開始レコードを5件ずつ表示する。
         $attendance = Attendance::where('start_time', 'like', "$date%")->paginate(5);
 
         return view('attendance', [
@@ -48,18 +54,19 @@ class AttendanceController extends Controller
 
     public function start(Request $request){
 
+        // 休憩レコードを空として定義しておく。
         $rest = '';
+        
         // 出勤中でないことを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
+
+        // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
         if(!isset($attendance)){
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
-            // dd($request->date);　nullが返ってきた。
             $form['start_time'] = now();
             Attendance::create($form);
-            // dd(Attendance::create($form));　start_timeは存在しなかった。
-            // dd($attendance);　nullが返ってきた(当然。。)。
             $message = '勤務開始しました';
         }else{
             $message = '勤務中なので勤務開始できません';
@@ -75,6 +82,8 @@ class AttendanceController extends Controller
 
         // 出勤中であることを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
+
+        // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
         if(isset($attendance)){
             // 休憩中でないことを確認。
