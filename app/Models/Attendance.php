@@ -15,28 +15,13 @@ class Attendance extends Model
         'user_id' => 'required',
     );
 
+    // 合計勤務時間。勤務終了時刻と勤務開始時刻の差から合計休憩時間を引いた値。
     public function getWorkingTimeAttribute(){
         $end = new Carbon($this->end_time);
         $start = new Carbon($this->start_time);
         $work = $end->diffInSeconds($start);
         $rest = strtotime($this->sumrestingtime);
-        // dd($rest);
-        // dd(date('y-m-d H:i:s', $rest));
-
         $times = $work - $rest + 2 * strtotime('1970-01-01');
-        // $seconds = $times % 60;
-        // $minutes = ($times - $seconds) / 60 % 60;
-        // dd(gettype($minutes));
-        // $hours = ($times - $seconds - $minutes * 60) / 3600;
-        // $time = sprintf('%02d', $hours).':'.sprintf('%02d',$minutes).':'.sprintf('%02d', $seconds);
-        // $time->subHours(9);
-        // dd(gettype($time));
-        // $time =(string)$time;
-        // $time->format('H:i:s');
-        // $time->toTimeString();
-        // dd($time);
-        // dd($end);
-        // dd($start);
         $time = date('H:i:s', $times);
         return $time;
     }
@@ -54,6 +39,7 @@ class Attendance extends Model
         return $user->name;
     }
 
+    // 合計休憩時間。
     public function getSumRestingTimeAttribute(){
         $rests = Rest::where('attendance_id', $this->id)->get();
         $sumrest =array();
@@ -64,11 +50,6 @@ class Attendance extends Model
             array_push($sumrest, $rest['time']);
         }
         $times = array_sum($sumrest) + strtotime('1970-01-01');
-        // return date('H:i:s', array_sum($sumrest));
-        // $seconds = $times % 60;
-        // $minutes = ($times - $seconds) / 60 % 60;
-        // $hours = ($times - $seconds - $minutes * 60) / 3600;
-        // $time = sprintf('%02d', $hours).':'.sprintf('%02d',$minutes).':'.sprintf('%02d', $seconds);
         $time = date('H:i:s', $times);
         return $time;
     }
