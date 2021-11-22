@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
+    // ホーム画面
     public function index(){
 
         // 休憩レコードを空として定義しておく。
@@ -52,6 +53,7 @@ class AttendanceController extends Controller
         ]);
     }
 
+    // 勤務開始
     public function start(Request $request){
 
         // 休憩レコードを空として定義しておく。
@@ -78,6 +80,8 @@ class AttendanceController extends Controller
         
         return redirect()->route('index');
     }
+
+    // 勤務終了
     public function end(Request $request){
 
         // 出勤中であることを確認。

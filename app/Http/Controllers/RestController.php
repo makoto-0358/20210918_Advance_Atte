@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 
 class restController extends Controller
 {
+    // 休憩開始
     public function start(Request $request){
 
         // 出勤中であることを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
+
+        // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
         if(isset($attendance)){
             // 休憩中でないことを確認。
@@ -36,10 +39,14 @@ class restController extends Controller
 
         return redirect()->route('index');
     }
+    
+    // 休憩終了
     public function end(Request $request){
 
         // 出勤中であることを確認。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
+
+        // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
         if(isset($attendance)){
             // 休憩中であることを確認。
