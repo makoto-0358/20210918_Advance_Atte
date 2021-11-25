@@ -12,13 +12,13 @@ class restController extends Controller
     // 休憩開始
     public function start(Request $request){
 
-        // 出勤中であることを確認。
+        // 出勤中レコードを検索。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
 
         // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
         if(isset($attendance)){
-            // 休憩中でないことを確認。
+            // 休憩中レコードを検索。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
             if(!isset($rest)){
                 $form = $request->all();
@@ -43,13 +43,13 @@ class restController extends Controller
     // 休憩終了
     public function end(Request $request){
 
-        // 出勤中であることを確認。
+        // 出勤中レコードを検索。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
 
         // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
         if(isset($attendance)){
-            // 休憩中であることを確認。
+            // 休憩中レコードを検索。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
             if(isset($rest)){
                 $form = $request->all();

@@ -15,7 +15,7 @@ class AttendanceController extends Controller
         // 休憩レコードを空として定義しておく。
         $rest = '';
 
-        // 出勤中レコードの定義。
+        // 出勤中レコードを検索。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
 
         // 出勤中の場合、休憩中レコードを上書きする。
@@ -42,7 +42,7 @@ class AttendanceController extends Controller
             }
         }
 
-        // 該当年月日における出勤開始レコードを5件ずつ表示する。
+        // 該当年月日における出勤レコードを5件ずつ表示する。
         $attendance = Attendance::where('start_time', 'like', "$date%")->paginate(5);
 
         return view('attendance', [
@@ -59,7 +59,7 @@ class AttendanceController extends Controller
         // 休憩レコードを空として定義しておく。
         $rest = '';
         
-        // 出勤中でないことを確認。
+        // 出勤中レコードを検索。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
 
         // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
@@ -84,13 +84,13 @@ class AttendanceController extends Controller
     // 勤務終了
     public function end(Request $request){
 
-        // 出勤中であることを確認。
+        // 出勤中レコードを検索。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
 
         // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
         if(isset($attendance)){
-            // 休憩中でないことを確認。
+            // 休憩中レコードを検索。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
             if(!isset($rest)){
                 $form = $request->all();
