@@ -93,11 +93,17 @@ http://pure-caverns-88245.herokuapp.com/
 ## GitHub から Clone(Mac で MySQL を使用している場合の例)
 
 `cd /Applications/MAMP/htdocs/Atte`
+
 `git clone https://github.com/makoto-0358/20210918_Advance_Atte.git`
+
 `cd 20210918_Advance_Atte`
+
 `composer install`
+
 `cp .env.example .env`
+
 `php artisan key:generate`
+
 `php artisan config:clear`
 
 ## データベース作成(Mac で MySQL を使用している場合の例)
@@ -109,10 +115,15 @@ http://pure-caverns-88245.herokuapp.com/
 ## .env の設定(Mac で MySQL を使用している場合の例)
 
 `DB_CONNECTION=mysql`
+
 `DB_HOST=127.0.0.1`
+
 `DB_PORT=3306`
+
 `DB_DATABASE=atteddb`
+
 `DB_USERNAME=root`
+
 `DB_PASSWORD=root`
 
 ## データベース作成後
