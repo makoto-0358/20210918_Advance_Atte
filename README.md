@@ -118,4 +118,5 @@ http://pure-caverns-88245.herokuapp.com/
 ## データベース作成後
 
 `php artisan serve`
+
 `php artisan migrate`
