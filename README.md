@@ -46,7 +46,7 @@ http://pure-caverns-88245.herokuapp.com/
 
 ## データベース設計
 
-（app/ER.drawio.png）
+!(app/ER.drawio.png)
 
 ## 開発環境
 
