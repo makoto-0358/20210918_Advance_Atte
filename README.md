@@ -102,28 +102,20 @@ http://pure-caverns-88245.herokuapp.com/
 
 ## データベース作成(Mac で MySQL を使用している場合の例)
 
-`cd /Applications/MAMP/Library/bin
-
-./mysql -u root -p
-
-CREATE DATABASE attedb;`
+`cd /Applications/MAMP/Library/bin`
+`./mysql -u root -p`
+`CREATE DATABASE attedb;`
 
 ## .env の設定(Mac で MySQL を使用している場合の例)
 
-`DB_CONNECTION=mysql
-
-DB_HOST=127.0.0.1
-
-DB_PORT=3306
-
-DB_DATABASE=atteddb
-
-DB_USERNAME=root
-
-DB_PASSWORD=root`
+`DB_CONNECTION=mysql`
+`DB_HOST=127.0.0.1`
+`DB_PORT=3306`
+`DB_DATABASE=atteddb`
+`DB_USERNAME=root`
+`DB_PASSWORD=root`
 
 ## データベース作成後
 
-`php artisan serve
-
-php artisan migrate`
+`php artisan serve`
+`php artisan migrate`
