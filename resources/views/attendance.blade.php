@@ -23,21 +23,21 @@
     </div>
 
     <!-- 打刻結果表示 -->
-    <table class="ml-8 flex md:justify-center overflow-x-auto whitespace-no-wrap md:w-4/5 md:mx-auto">
-        <tr class="flex flex-no-wrap border-t-2 border-gray-400">
-            <th class="w-24 py-4 flex justify-center items-center md:w-56">名前</th>
-            <th class="w-24 py-4 flex justify-center items-center md:w-56">勤務開始</th>
-            <th class="w-24 py-4 flex justify-center items-center md:w-56">勤務終了</th>
-            <th class="w-24 py-4 flex justify-center items-center md:w-56">休憩時間</th>
-            <th class="w-24 py-4 flex justify-center items-center md:w-56">勤務時間</th>
+    <table class="flex justify-center items-center md:w-4/5 md:mx-auto">
+        <tr class="flex items-center border-t-2 border-gray-400">
+            <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">名前</th>
+            <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">勤務開始</th>
+            <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">勤務終了</th>
+            <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">休憩時間</th>
+            <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">勤務時間</th>
         </tr>
         @foreach($items as $item)
             <tr class="flex content-between border-t-2 border-gray-400">
-                <td class="w-24 py-4 flex justify-center items-center md:w-56">{{$item->name}}</td>
-                <td class="w-24 py-4 flex justify-center items-center md:w-56">{{substr($item->start_time, 11, 8)}}</td>
-                <td class="w-24 py-4 flex justify-center items-center md:w-56">{{substr($item->end_time, 11, 8)}}</td>
-                <td class="w-24 py-4 flex justify-center items-center md:w-56">{{$item->sum_resting_time}}</td>
-                <td class="w-24 py-4 flex justify-center items-center md:w-56">{{$item->working_time}}</td>
+                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{$item->name}}</td>
+                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{substr($item->start_time, 11, 8)}}</td>
+                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{substr($item->end_time, 11, 8)}}</td>
+                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{$item->sum_resting_time}}</td>
+                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{$item->working_time}}</td>
             </tr>
         @endforeach
     </table>
