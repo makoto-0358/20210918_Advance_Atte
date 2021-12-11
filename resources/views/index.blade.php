@@ -2,7 +2,7 @@
     <div class="py-10 flex justify-center text-2xl font-bold">
         {{ Auth::user()->name }}さんお疲れ様です！
     </div>
-    
+
     <!-- 現在の状況 -->
     <div class="flex justify-center">
         @isset($attendance)
@@ -27,7 +27,7 @@
     <!-- 各種ボタン -->
     <div class="py-12 flex flex-wrap text-2xl md:py-12 md:mx-40">
         <!-- 勤務開始ボタン -->
-        <div class="w-5/12 mx-auto my-6">
+        <div class="w-10/12 mx-auto my-2 md:w-5/12 md:my-6">
             <div class="bg-white overflow-hidden shadow-sm">
                 @isset($attendance)
                     <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-default md:py-20 font-bold text-gray-400">勤務開始</div>
@@ -45,7 +45,7 @@
         </div>
 
         <!-- 勤務終了ボタン -->
-        <div class="w-5/12 mx-auto my-6">
+        <div class="w-10/12 mx-auto my-2 md:w-5/12 md:my-6">
             <div class="bg-white overflow-hidden shadow-sm">
                 @isset($attendance)
                     @empty($rest)
@@ -67,7 +67,7 @@
         </div>
 
         <!-- 休憩開始ボタン -->
-        <div class="w-5/12 mx-auto my-6">
+        <div class="w-10/12 mx-auto my-2 md:w-5/12 md:my-6">
             <div class="bg-white overflow-hidden shadow-sm">
                 @isset($attendance)
                     @empty($rest)
@@ -89,7 +89,7 @@
         </div>
 
         <!-- 休憩終了ボタン -->
-        <div class="w-5/12 mx-auto my-6">
+        <div class="w-10/12 mx-auto my-2 md:w-5/12 md:my-6">
             <div class="bg-white overflow-hidden shadow-sm">
                 @isset($attendance)
                     @isset($rest)
