@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Rest;
+use App\Models\Attendance;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RestFactory extends Factory
@@ -23,9 +24,9 @@ class RestFactory extends Factory
     {
         $time = $this->faker->dateTimeBetween($dstartTime='+1hour', $endDate='3hour');
         return [
-            'attendance_id' => Attendancer::factory(),
-            'start_time' => $time->format('H:i:s'),
-            'end_time' => $time->modify($dstartTime='+1hour', $endDate='+2hour')->format('H:i:s')
+            'attendance_id' => Attendance::factory(),
+            'start_time' => $time->format('Y-m-d H:i:s'),
+            'end_time' => $time->modify('+1hour')->format('Y-m-d H:i:s')
         ];
     }
 }

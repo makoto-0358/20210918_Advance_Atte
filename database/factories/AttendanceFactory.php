@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Attendance;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AttendanceFactory extends Factory
@@ -24,11 +25,8 @@ class AttendanceFactory extends Factory
         $time = $this->faker->dateTimeBetween($dstartTime='-1week', $endDate='now');
         return [
             'user_id' => User::factory(),
-            'user_name' => function(array $attributes){
-                return User::find($attributes['user_id'])->name;
-            },
-            'start_time' => $time->format('H:i:s'),
-            'end_time' => $time->modify($dstartTime='+5hour', $endDate='+12hour')->format('H:i:s')
+            'start_time' => $time->format('Y-m-d H:i:s'),
+            'end_time' => $time->modify('+1hour')->format('Y-m-d H:i:s')
         ];
     }
 }
