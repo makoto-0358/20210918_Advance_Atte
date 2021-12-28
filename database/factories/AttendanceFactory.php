@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Time;
+use App\Models\Attendance;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TimeFactory extends Factory
@@ -12,7 +12,7 @@ class TimeFactory extends Factory
      *
      * @var string
      */
-    protected $model = Time::class;
+    protected $model = Attendance::class;
 
     /**
      * Define the model's default state.
@@ -21,15 +21,14 @@ class TimeFactory extends Factory
      */
     public function definition()
     {
+        $time = $this->faker->dateTimeBetween($dstartTime='-1week', $endDate='now');
         return [
-            'user_id' => AtteUser::factory(),
-            'user_name' => function(array $atteusers){
-                return AtteUser::find($atteusers['user_id'])->name;
+            'user_id' => User::factory(),
+            'user_name' => function(array $attributes){
+                return User::find($attributes['user_id'])->name;
             },
-            'date' => $this->faker->dateTimeBetween($startDate='-10years', $endDate='+10years')->format('Y-m-d'),
-            'start_time' => $this->faker->dateTimeBetween($dstartTime='-10years', $endDate='+10years')->format('H:i:s'),
-            'closing_time' => $this->faker->dateTimeBetween($dstartTime='-10years', $endDate='+10years')->format('H:i:s'),
-            'break_times' => $this->faker->dateTimeBetween($dstartTime='-10years', $endDate='+10years')->format('H:i:s')
+            'start_time' => $time->format('H:i:s'),
+            'end_time' => $time->modify($dstartTime='+5hour', $endDate='+12hour')->format('H:i:s')
         ];
     }
 }
