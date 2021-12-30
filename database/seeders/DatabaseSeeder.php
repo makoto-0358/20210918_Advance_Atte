@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\Attendance;
+use App\Models\Rest;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,8 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
-        \App\Models\Attendance::factory(20)->create();
-        \App\Models\Rest::factory(40)->create();
+        User::factory()->count(2)->create()->each(function($user){
+            Attendance::factory()->count(2)->make()->each(function($attendance)use($user){
+                $user->attendances()->save($attendance);
+            });
+        });
     }
 }
