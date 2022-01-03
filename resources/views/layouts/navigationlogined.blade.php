@@ -9,6 +9,7 @@
             <div class="flex-shrink-0 flex items-center justify-center">
                 <a class="m-2 font-bold md:m-6" href="{{route('index')}}">ホーム</a>
                 <a class="m-2 font-bold md:m-6" href="{{route('attendance')}}">日付一覧</a>
+                <a class="m-2 font-bold md:m-6" href="{{route('userattendance')}}">勤怠一覧</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a class="m-2 font-bold md:m-6" href="route('logout')"

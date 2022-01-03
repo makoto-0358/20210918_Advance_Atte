@@ -37,4 +37,7 @@ Route::post('/rest/start', [RestController::class, 'start'])
 Route::post('/rest/end', [RestController::class, 'end'])
 ->middleware(['auth']);
 
+Route::get('/userattendance', [AttendanceController::class, 'userattendance'])
+->middleware(['auth'])->name('userattendance');
+
 require __DIR__.'/auth.php';

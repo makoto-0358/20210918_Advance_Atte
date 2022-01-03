@@ -111,4 +111,13 @@ class AttendanceController extends Controller
 
         return redirect()->route('index');
     }
+
+    // ユーザーページ
+    public function userattendance(Request $request){
+        $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->paginate(5);
+
+        return view('userattendance', [
+            'items' => $attendance,
+        ]);
+    }
 }
