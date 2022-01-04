@@ -53,3 +53,10 @@ $app->singleton(
 */
 
 return $app;
+
+// .envファイル切り替え
+switch ($_SERVER['SERVER_NAME'] ?? 'localhost'){
+    case 'pure-caverns-88245.herokuapp.com':
+        $app->loadEnvironmentfrom('.env.heroku');
+        break;
+}
