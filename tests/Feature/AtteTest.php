@@ -53,26 +53,22 @@ class AtteTest extends TestCase
 
         $response = $this->post('/login', [
             'email' => $user->email,
-            // 'password' => $user->password,
             'password' => 'password',
         ]);
 
-        $response->assertSessionHasNoErrors();
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
+    // 既存ユーザーがログインできない事の確認
+    public function test_not_login()
+    {
+        $user = User::factory()->create();
 
-    // public function test_users_can_authenticate_using_the_login_screen()
-    // {
-    //     $user = User::factory()->create();
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'error_password',
+        ]);
 
-    //     $response = $this->post('/login', [
-    //         'email' => $user->email,
-    //         'password' => 'password',
-    //     ]);
-
-    //     $this->assertAuthenticated();
-    //     $response->assertRedirect(RouteServiceProvider::HOME);
-    // }
-
+        $this->assertGuest();
+    }
 }
