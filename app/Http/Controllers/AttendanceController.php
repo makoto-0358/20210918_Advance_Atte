@@ -64,6 +64,8 @@ class AttendanceController extends Controller
 
         // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
+
+        // 出勤中でなければ現在時刻で勤務開始し、出勤中であれば勤務開始しない。
         if(!isset($attendance)){
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
@@ -89,8 +91,10 @@ class AttendanceController extends Controller
 
         // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
+
+        // 出勤中である場合、休憩中レコードを検索。
+            // 休憩中でなければ現在時刻で勤務終了する。
         if(isset($attendance)){
-            // 休憩中レコードを検索。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
             if(!isset($rest)){
                 $form = $request->all();
@@ -112,7 +116,7 @@ class AttendanceController extends Controller
         return redirect()->route('index');
     }
 
-    // ユーザーページ
+    // ユーザーページ。ユーザー毎の出勤データを最新から5件ずつ表示する。
     public function userattendance(Request $request){
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->paginate(5);
 
