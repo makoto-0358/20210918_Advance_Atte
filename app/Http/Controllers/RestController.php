@@ -17,8 +17,10 @@ class restController extends Controller
 
         // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
+
+        // 勤務中レコードがある場合、休憩中レコードを検索。
+            // 休憩中でなければ、現在時刻で休憩開始する。
         if(isset($attendance)){
-            // 休憩中レコードを検索。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
             if(!isset($rest)){
                 $form = $request->all();
@@ -48,8 +50,10 @@ class restController extends Controller
 
         // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
         $message = '';
+
+        // 出勤中レコードがある場合、休憩中レコードを検索。
+            // 休憩中であれば、現在時刻で休憩終了する。。
         if(isset($attendance)){
-            // 休憩中レコードを検索。
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
             if(isset($rest)){
                 $form = $request->all();
