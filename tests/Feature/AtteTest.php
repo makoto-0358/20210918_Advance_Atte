@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-// use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Attendance;
@@ -77,16 +76,6 @@ class AtteTest extends TestCase
 
         $this->assertGuest();
     }
-
-    //  /ログイン中にpostへ行けることの確認
-    // public function test_post()
-    // {
-    //     $user = User::factory()->create();
-    //     $response = $this->actingAs($user);
-
-    //     $response = $this->post('/rest/start');
-    //     $response->assertRedirect(RouteServiceProvider::HOME);
-    // }
     
     // 勤務中でない場合、勤務開始できることの確認。
     public function test_attendance_start()
