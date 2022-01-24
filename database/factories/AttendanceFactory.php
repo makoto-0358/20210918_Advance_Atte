@@ -24,7 +24,6 @@ class AttendanceFactory extends Factory
     {
         $time = $this->faker->dateTimeBetween($startTime='-1week', $endDate='now');
         return [
-            'user_id' => $user = User::factory()->create()->id,
             'start_time' => $time->format('Y-m-d H:i:s'),
             'end_time' => $time->modify('+8hour')->format('Y-m-d H:i:s')
         ];
