@@ -23,9 +23,15 @@ class AtteTest extends TestCase
      use RefreshDatabase;
 
     //  /registerへ行けることの確認
-    public function test_register()
+    public function test_get_register()
     {
         $response = $this->get('/register');
+        $response->assertStatus(200);
+    }
+    //  /loginへ行けることの確認
+    public function test_get_login()
+    {
+        $response = $this->get('/login');
         $response->assertStatus(200);
     }
 
@@ -76,6 +82,78 @@ class AtteTest extends TestCase
 
         $this->assertGuest();
     }
+
+    // ログイン後に/attendance/startにpostできる事の確認
+    public function test_post_attendance_start()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+
+        $response = $this->post('/attendance/start');
+        $response->assertRedirect(route('index'));
+    }
+
+    // ログインしてない場合に/attendance/startにpostできない事の確認
+    public function test_not_post_attendance_start()
+    {
+        $response = $this->post('/attendance/start');
+
+        $this->assertGuest();
+    }
+
+    // ログイン後に/attendance/endにpostできる事の確認
+    public function test_post_attendance_end()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+
+        $response = $this->post('/attendance/end');
+        $response->assertRedirect(route('index'));
+    }
+
+    // ログインしてない場合に/attendance/endにpostできない事の確認
+    public function test_not_post_attendance_end()
+    {
+        $response = $this->post('/attendance/end');
+
+        $this->assertGuest();
+    }
+
+    // ログイン後に/rest/startにpostできる事の確認
+    public function test_post_rest_start()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+
+        $response = $this->post('/rest/start');
+        $response->assertRedirect(route('index'));
+    }
+
+    // ログインしてない場合に/rest/startにpostできない事の確認
+    public function test_not_post_rest_start()
+    {
+        $response = $this->post('/rest/start');
+
+        $this->assertGuest();
+    }
+
+    // ログイン後に/rest/endにpostできる事の確認
+    public function test_post_rest_end()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+
+        $response = $this->post('/rest/end');
+        $response->assertRedirect(route('index'));
+    }
+
+    // ログインしてない場合に/rest/endにpostできない事の確認
+    public function test_not_post_rest_end()
+    {
+        $response = $this->post('/rest/end');
+
+        $this->assertGuest();
+    }
     
     // 勤務中でない場合、勤務開始できることの確認。
     public function test_attendance_start()
@@ -89,8 +167,6 @@ class AtteTest extends TestCase
             'start_time' => $dt1,
         ];
         Attendance::create($attendance);
-        $response = $this->post('/attendance/start');
-        $response->assertRedirect(route('index'));
         $response = $this->assertDatabaseHas('attendances', [
             'user_id' => $user->id,
             'start_time' => $dt1,
@@ -112,8 +188,6 @@ class AtteTest extends TestCase
 
         ];
         Attendance::create($attendance);
-        $response = $this->post('/attendance/start');
-        $response->assertRedirect(route('index'));
         $response = $this->assertDatabaseHas('attendances', [
             'user_id' => $user->id,
             'start_time' => $dt1,
@@ -126,8 +200,6 @@ class AtteTest extends TestCase
         $form['end_time'] = $dt2;
         unset($form["_token"]);
         $attendance->update($form);
-        $response = $this->post('/attendance/end');
-        $response->assertRedirect(route('index'));
         $response = $this->assertDatabaseHas('attendances', [
             'user_id' => $user->id,
             'start_time' => $dt1,
@@ -149,8 +221,6 @@ class AtteTest extends TestCase
             'end_time' => null,
         ];
         Attendance::create($attendance);
-        $response = $this->post('/attendance/start');
-        $response->assertRedirect(route('index'));
         $response = $this->assertDatabaseHas('attendances', [
             'user_id' => $user->id,
             'start_time' => $dt1,
@@ -166,8 +236,6 @@ class AtteTest extends TestCase
             'end_time' => null,
         ];
         Rest::create($rest);
-        $response = $this->post('/rest/start');
-        $response->assertRedirect(route('index'));
         $response = $this->assertDatabaseHas('rests', [
             'attendance_id' => $attendance->id,
             'start_time' => $dt2,
@@ -189,14 +257,12 @@ class AtteTest extends TestCase
             'end_time' => null,
         ];
         Attendance::create($attendance);
-        $response = $this->post('/attendance/start');
-        $response->assertRedirect(route('index'));
         $response = $this->assertDatabaseHas('attendances', [
             'user_id' => $user->id,
             'start_time' => $dt1,
             'end_time' => null,
         ]);
-        
+
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
         $dt2 = now()->addHours(2);
         $rest = '';
@@ -206,8 +272,6 @@ class AtteTest extends TestCase
             'end_time' => null,
         ];
         Rest::create($rest);
-        $response = $this->post('/rest/start');
-        $response->assertRedirect(route('index'));
         $response = $this->assertDatabaseHas('rests', [
             'attendance_id' => $attendance->id,
             'start_time' => $dt2,
@@ -220,8 +284,6 @@ class AtteTest extends TestCase
         $form['end_time'] = $dt3;
         unset($form["_token"]);
         $rest->update($form);
-        $response = $this->post('/rest/end');
-        $response->assertRedirect(route('index'));
         $response = $this->assertDatabaseHas('rests', [
             'attendance_id' => $attendance->id,
             'start_time' => $dt2,
