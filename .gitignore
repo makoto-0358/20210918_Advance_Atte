@@ -6,7 +6,6 @@
 .env
 .env.heroku
 .env copy.heroku
-.env.local
 .env.testing
 .env.backup
 .phpunit.result.cache
