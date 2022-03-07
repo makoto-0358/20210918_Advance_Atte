@@ -20,7 +20,7 @@ jobs:
 
       - run:
           name: イメージに同梱されているPHP拡張モジュールをインストール
-          command: sudo docker-php-ext-install pdo_mysql
+          command: sudo -E docker-php-ext-install pdo_mysql
 
       - restore_cache:
           keys:
