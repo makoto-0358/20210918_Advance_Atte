@@ -4,7 +4,7 @@ jobs:
   build:
     # working_directory: ~/project/src
     docker:
-      - image: cimg/php:7.4-browser
+      - image: cimg/php:7.4-browsers
       - image: cimg/mysql:8.0
 
     environment:
