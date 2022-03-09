@@ -4,7 +4,7 @@ jobs:
   build:
     # working_directory: ~/project/src
     docker:
-      - image: cimg/php:7.4-browsers
+      - image: cimg/php:7.4
       - image: cimg/mysql:8.0
 
     environment:
@@ -15,12 +15,16 @@ jobs:
         # path: ~/project
 
       - run:
+          name: aptパッケージインストール
+          command: sudo apt-get update && sudo apt-get install -y <the-package>
+
+      - run:
           name: Linux OS のパッケージリスト更新
           command: sudo apt-get update
 
       - run:
           name: イメージに同梱されているPHP拡張モジュールをインストール
-          command: sudo -E docker-php-ext-install pdo_mysql
+          command: sudo docker-php-ext-install pdo_mysql
 
       - restore_cache:
           keys:
