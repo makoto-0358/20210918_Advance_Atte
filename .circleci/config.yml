@@ -4,8 +4,8 @@ jobs:
   build:
     # working_directory: ~/project/src
     docker:
-      - image: cimg/php:7.4
-      - image: cimg/mysql:8.0
+      - image: circleci/php:7.4
+      - image: circleci/mysql:8.0
 
     environment:
       - DB_CONNECTION: testing
@@ -14,9 +14,9 @@ jobs:
       - checkout
         # path: ~/project
 
-      - run:
-          name: aptパッケージインストール
-          command: sudo apt-get update && sudo apt-get install -y <the-package>
+      # - run:
+      #     name: aptパッケージインストール
+      #     command: sudo apt-get update && sudo apt-get install -y <the-package>
 
       - run:
           name: Linux OS のパッケージリスト更新
