@@ -58,7 +58,7 @@ jobs:
 
       - run:
           name: .env ファイルを復元
-          command: echo $ENV_FILE | base64 --di > .env.testing
+          command: echo $ENV_FILE | base64 -di > .env.testing
 
       - run:
           name: マイグレーションを実行
