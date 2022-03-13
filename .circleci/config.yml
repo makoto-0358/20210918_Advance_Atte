@@ -60,9 +60,10 @@ jobs:
           name: .env ファイルを復元
           command: echo $ENV_FILE | base64 -di > .env.testing
 
-      - run:
-          name: マイグレーションを実行
-          command: vendor/bin/sail artisan migrate --env=testing --force
+      # - run:
+      #     name: マイグレーションを実行
+      #     command: php artisan migrate --env=testing --force
+      # command: vendor/bin/sail artisan migrate --env=testing --force
 
       # - run: mkdir -p test_results
 
@@ -70,6 +71,7 @@ jobs:
           name: テストを実行
           # command: ./vendor/bin/phpunit --testdox-xmltest_results/phpunit/result.xml --coverage-html=coverage
           command: ./vendor/bin/phpunit
+          # command: vendor/bin/sail test
 
       # - store_test_results:
       #     path: test_results
