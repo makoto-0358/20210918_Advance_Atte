@@ -62,7 +62,7 @@ jobs:
 
       - run:
           name: マイグレーションを実行
-          command: php artisan migrate --env=testing --force
+          command: vendor/bin/sail artisan migrate --env=testing --force
 
       # - run: mkdir -p test_results
 
