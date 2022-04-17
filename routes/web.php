@@ -19,14 +19,15 @@ use App\Models\Rest;
 |
 */
 
-Route::get('/session', [SessionController::class, 'getSes']);
+Route::get('/session', [SessionController::class, 'getSes'])
+->middleware(['verified']);
 Route::post('/session', [SessionController::class, 'postSes']);
 
 Route::get('/', [AttendanceController::class, 'index'])
-->middleware(['auth'])->name('index');
+->middleware(['verified'])->name('index');
 
 Route::get('/attendance/{date?}', [AttendanceController::class, 'attendance'])
-->middleware(['auth'])->name('attendance');
+->middleware(['verified'])->name('attendance');
 
 Route::post('/attendance/start', [AttendanceController::class, 'start'])
 ->middleware(['auth']);
@@ -38,6 +39,6 @@ Route::post('/rest/end', [RestController::class, 'end'])
 ->middleware(['auth']);
 
 Route::get('/userattendance', [AttendanceController::class, 'userattendance'])
-->middleware(['auth'])->name('userattendance');
+->middleware(['verified'])->name('userattendance');
 
 require __DIR__.'/auth.php';
