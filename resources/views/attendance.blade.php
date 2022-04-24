@@ -33,17 +33,17 @@
         </tr>
         @foreach($items as $item)
             <tr class="flex content-between border-t-2 border-gray-400">
-                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{$item->name}}</td>
-                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{substr($item->start_time, 11, 8)}}</td>
-                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{substr($item->end_time, 11, 8)}}</td>
-                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{$item->sum_resting_time}}</td>
-                <th class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{$item->working_time}}</td>
+                <td class="w-16 py-4 mx-1 flex justify-center items-center text-xs overflow-auto md:w-56 md:text-base">{{$item->name}}</td>
+                <td class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{substr($item->start_time, 11, 8)}}</td>
+                <td class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{substr($item->end_time, 11, 8)}}</td>
+                <td class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{$item->sum_resting_time}}</td>
+                <td class="w-16 py-4 mx-1 flex justify-center items-center text-xs md:w-56 md:text-base">{{$item->working_time}}</td>
             </tr>
         @endforeach
     </table>
 
     <!-- ページネーション -->
-    <div class="flex justify-center">
+    <div class="mt-12 flex justify-center">
         {{$items->links()}}
     </div>
 </x-appmember-layout>
