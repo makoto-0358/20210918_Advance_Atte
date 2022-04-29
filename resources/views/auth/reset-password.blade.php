@@ -1,9 +1,7 @@
-<x-guest-layout>
+<x-appguest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            パスワードの再設定
         </x-slot>
 
         <!-- Validation Errors -->
@@ -17,32 +15,37 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <div class="mt-4">
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+                <x-input id="email" class="block mt-1 w-full bg-gray-100 border-4" type="email" placeholder="メールアドレス" name="email" :value="old('email')" required />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password" />
 
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+                <x-input id="password" class="block mt-1 w-full bg-gray-100 border-4"
+                                type="password"
+                                placeholder="パスワード"
+                                name="password"
+                                required autocomplete="new-password" />
             </div>
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-label for="password_confirmation" />
 
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                    type="password"
-                                    name="password_confirmation" required />
+                <x-input id="password_confirmation" class="block mt-1 w-full bg-gray-100 border-4"
+                                type="password"
+                                placeholder="確認用パスワード"
+                                name="password_confirmation" required />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
+            <div class="mt-4">
+                <x-button class="w-full flex items-center justify-center bg-blue-700 text-base">
                     {{ __('Reset Password') }}
                 </x-button>
             </div>
         </form>
     </x-auth-card>
-</x-guest-layout>
+</x-appguest-layout>
