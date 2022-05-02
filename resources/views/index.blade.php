@@ -70,7 +70,7 @@
                     <form action="/rest/start" method="post">
                         @csrf
                         <label class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
-                            button class="font-bold" type="submit">休憩開始</button>
+                            <button class="font-bold" type="submit">休憩開始</button>
                         </label>
                     </form>
                     @else
