@@ -34,10 +34,8 @@
                 @else
                 <form action="/attendance/start" method="post">
                     @csrf
-                    <label>
-                        <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
-                            <button class="font-bold" type="submit">勤務開始</button>
-                        </div>
+                    <label class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                        <button class="font-bold" type="submit">勤務開始</button>
                     </label>
                 </form>
                 @endisset
@@ -51,10 +49,8 @@
                     @empty($rest)
                     <form action="/attendance/end" method="post">
                         @csrf
-                        <label>
-                            <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer cursor-default md:py-20">
-                                <button class="font-bold" type="submit">勤務終了</button>
-                            </div>
+                        <label class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer cursor-default md:py-20">
+                            <button class="font-bold" type="submit">勤務終了</button>
                         </label>
                     </form>
                     @else
@@ -73,10 +69,8 @@
                     @empty($rest)
                     <form action="/rest/start" method="post">
                         @csrf
-                        <label>
-                            <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
-                                <button class="font-bold" type="submit">休憩開始</button>
-                            </div>
+                        <label class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                            button class="font-bold" type="submit">休憩開始</button>
                         </label>
                     </form>
                     @else
@@ -95,10 +89,8 @@
                     @isset($rest)
                     <form action="/rest/end" method="post">
                         @csrf
-                        <label>
-                            <div class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
-                                <button class="font-bold" type="submit">休憩終了</button>
-                            </div>
+                        <label class="py-3 px-auto bg-white border-b border-gray-200 flex item-center justify-center cursor-pointer md:py-20">
+                            <button class="font-bold" type="submit">休憩終了</button>
                         </label>
                     </form>
                     @else
