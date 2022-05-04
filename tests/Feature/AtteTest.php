@@ -22,141 +22,183 @@ class AtteTest extends TestCase
 
      use RefreshDatabase;
 
-    //  /registerへ行けることの確認
-    public function test_get_register()
+    //  アクセスのテスト
+
+    public function test_認証済みユーザーはログイン中にホーム画面へgetでアクセスできる()
     {
-        $response = $this->get('/register');
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+        
+        $response = $this->get('/');
+
         $response->assertStatus(200);
     }
-    //  /loginへ行けることの確認
-    public function test_get_login()
+
+    public function test_認証済みユーザーがログイン中にホーム画面へgetでアクセスするとindexが表示される()
     {
-        $response = $this->get('/login');
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+        
+        $response = $this->get('/');
+
+        $response->assertViewIs('index');
+    }
+
+    public function test_ログイン中でなければにホーム画面へgetでアクセスできない()
+    {
+        $user = User::factory()->create([]);
+        
+        $response = $this->get('/');
+
+        $response->assertStatus(302);
+    }
+
+    public function test_認証済みユーザーはログイン中に日付一覧画面へアクセスできる()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+
+        $response = $this->get('/attendance');
+
         $response->assertStatus(200);
     }
 
-    // /no_route(存在しない)へ行けない事の確認
-    public function test_no_route()
+    public function test_認証済みユーザーがログイン中に日付一覧画面へアクセスするとattendanceが表示される()
     {
-        $response = $this->get('/no_route');
-        $response->assertStatus(404);
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+
+        $response = $this->get('/attendance');
+
+        $response->assertStatus(200);
     }
 
-    // 新規ユーザー登録できる事の確認
-    public function test_new_user()
+    public function test_ログイン中でなければに日付一覧画面へアクセスできない()
     {
-        $response = $this->post('/register',[
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => '12345678',
-            'password_confirmation' => '12345678',
-        ]);
+        $user = User::factory()->create();
+        
+        $response = $this->get('/attendance');
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $this->assertGuest();
     }
 
-    // 既存ユーザーがログインできる事の確認
-    public function test_login()
+    public function test_認証済みユーザーはログイン中に勤怠一覧画面へアクセスできる()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+
+        $response = $this->get('/userattendance');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_ログイン中でなければに勤怠一覧画面へアクセスできない()
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
-
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
-    }
-
-    // 既存ユーザーがパスワードを間違えた場合にログインできない事の確認
-    public function test_not_login()
-    {
-        $user = User::factory()->create();
-
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'error_password',
-        ]);
+        $response = $this->get('/userattendance');
 
         $this->assertGuest();
     }
 
     // ログイン後に/attendance/startにpostできる事の確認
-    public function test_post_attendance_start()
+    public function test_認証済みユーザーはログイン中にattendance_startへポストできる()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
 
         $response = $this->post('/attendance/start');
+
         $response->assertRedirect(route('index'));
     }
 
     // ログインしてない場合に/attendance/startにpostできない事の確認
-    public function test_not_post_attendance_start()
+    public function test_ログイン中でなければattendance_startへポストできない()
     {
+        $user = User::factory()->create();
+
         $response = $this->post('/attendance/start');
 
         $this->assertGuest();
     }
 
     // ログイン後に/attendance/endにpostできる事の確認
-    public function test_post_attendance_end()
+    public function test_認証済みユーザーはログイン中にattendance_endへポストできる()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
 
         $response = $this->post('/attendance/end');
+
         $response->assertRedirect(route('index'));
     }
 
     // ログインしてない場合に/attendance/endにpostできない事の確認
-    public function test_not_post_attendance_end()
+    public function test_ログイン中でなければattendance_endへポストできない()
     {
+        $user = User::factory()->create();
+
         $response = $this->post('/attendance/end');
 
         $this->assertGuest();
     }
 
     // ログイン後に/rest/startにpostできる事の確認
-    public function test_post_rest_start()
+    public function test_認証済みユーザーはログイン中にrest_startへポストできる()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
 
         $response = $this->post('/rest/start');
+
         $response->assertRedirect(route('index'));
     }
 
     // ログインしてない場合に/rest/startにpostできない事の確認
-    public function test_not_post_rest_start()
+    public function test_ログイン中でなければrest_startへポストできない()
     {
+        $user = User::factory()->create();
+
         $response = $this->post('/rest/start');
 
         $this->assertGuest();
     }
 
     // ログイン後に/rest/endにpostできる事の確認
-    public function test_post_rest_end()
+    public function test_認証済みユーザーはログイン中にrest_endへポストできる()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
 
         $response = $this->post('/rest/end');
+
         $response->assertRedirect(route('index'));
     }
 
     // ログインしてない場合に/rest/endにpostできない事の確認
-    public function test_not_post_rest_end()
+    public function test_ログイン中でなければrest_endへポストできない()
     {
+        $user = User::factory()->create();
+
         $response = $this->post('/rest/end');
 
         $this->assertGuest();
     }
-    
-    // 勤務中でない場合、勤務開始できることの確認。
-    public function test_attendance_start()
+
+    public function test_認証済みユーザーのログイン中でも存在しない画面へアクセスできない()
+    {
+        $user = User::factory()->create();
+        $response = $this->actingAs($user);
+
+        $response = $this->get('/no_route');
+
+        $response->assertStatus(404);
+    }
+
+
+    // データベースのテスト
+
+    public function test_勤務中でない場合、勤務開始できる()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
@@ -173,8 +215,7 @@ class AtteTest extends TestCase
         ]);
     }
 
-        // 勤務中の場合、休憩中でなければ勤務終了できることの確認。
-    public function test_attendance_end()
+    public function test_勤務中の場合、休憩中でなければ勤務終了できる()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
@@ -193,7 +234,7 @@ class AtteTest extends TestCase
             'start_time' => $dt1,
             'end_time' => null,
         ]);
-        
+
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
         $rest = '';
         $dt2 = now()->addHours(2);
@@ -207,8 +248,7 @@ class AtteTest extends TestCase
         ]);
     }
 
-    // 勤務中の場合、休憩中でなければ休憩開始できることの確認。
-    public function test_rest_start()
+    public function test_勤務中の場合、休憩中でなければ休憩開始できる()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
@@ -226,7 +266,7 @@ class AtteTest extends TestCase
             'start_time' => $dt1,
             'end_time' => null,
         ]);
-        
+
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
         $dt2 = now()->addHours(2);
         $rest = '';
@@ -243,8 +283,7 @@ class AtteTest extends TestCase
         ]);
     }
 
-    // 勤務中の場合、休憩中であれば休憩終了できることの確認。
-    public function test_rest_end()
+    public function test_勤務中の場合、休憩中であれば休憩終了できる()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
