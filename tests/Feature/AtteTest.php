@@ -44,15 +44,6 @@ class AtteTest extends TestCase
         $response->assertViewIs('index');
     }
 
-    public function test_ログイン中でなければにホーム画面へgetでアクセスできない()
-    {
-        $user = User::factory()->create([]);
-        
-        $response = $this->get('/');
-
-        $response->assertStatus(302);
-    }
-
     public function test_認証済みユーザーはログイン中に日付一覧画面へアクセスできる()
     {
         $user = User::factory()->create();
@@ -70,16 +61,7 @@ class AtteTest extends TestCase
 
         $response = $this->get('/attendance');
 
-        $response->assertStatus(200);
-    }
-
-    public function test_ログイン中でなければに日付一覧画面へアクセスできない()
-    {
-        $user = User::factory()->create();
-        
-        $response = $this->get('/attendance');
-
-        $this->assertGuest();
+        $response->assertViewIs('attendance');
     }
 
     public function test_認証済みユーザーはログイン中に勤怠一覧画面へアクセスできる()
@@ -92,17 +74,17 @@ class AtteTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_ログイン中でなければに勤怠一覧画面へアクセスできない()
+    public function test_認証済みユーザーがログイン中に勤怠一覧画面へアクセスするとuserattendanceが表示される()
     {
         $user = User::factory()->create();
+        $response = $this->actingAs($user);
 
         $response = $this->get('/userattendance');
 
-        $this->assertGuest();
+        $response->assertViewIs('userattendance');
     }
 
-    // ログイン後に/attendance/startにpostできる事の確認
-    public function test_認証済みユーザーはログイン中にattendance_startへポストできる()
+    public function test_認証済みユーザーがログイン中にattendance_startへポストするとindexが表示される()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
@@ -112,18 +94,7 @@ class AtteTest extends TestCase
         $response->assertRedirect(route('index'));
     }
 
-    // ログインしてない場合に/attendance/startにpostできない事の確認
-    public function test_ログイン中でなければattendance_startへポストできない()
-    {
-        $user = User::factory()->create();
-
-        $response = $this->post('/attendance/start');
-
-        $this->assertGuest();
-    }
-
-    // ログイン後に/attendance/endにpostできる事の確認
-    public function test_認証済みユーザーはログイン中にattendance_endへポストできる()
+    public function test_認証済みユーザーがログイン中にattendance_endへポストするとindexが表示される()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
@@ -133,18 +104,7 @@ class AtteTest extends TestCase
         $response->assertRedirect(route('index'));
     }
 
-    // ログインしてない場合に/attendance/endにpostできない事の確認
-    public function test_ログイン中でなければattendance_endへポストできない()
-    {
-        $user = User::factory()->create();
-
-        $response = $this->post('/attendance/end');
-
-        $this->assertGuest();
-    }
-
-    // ログイン後に/rest/startにpostできる事の確認
-    public function test_認証済みユーザーはログイン中にrest_startへポストできる()
+    public function test_認証済みユーザーがログイン中にrest_startへポストするとindexが表示される()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
@@ -154,18 +114,7 @@ class AtteTest extends TestCase
         $response->assertRedirect(route('index'));
     }
 
-    // ログインしてない場合に/rest/startにpostできない事の確認
-    public function test_ログイン中でなければrest_startへポストできない()
-    {
-        $user = User::factory()->create();
-
-        $response = $this->post('/rest/start');
-
-        $this->assertGuest();
-    }
-
-    // ログイン後に/rest/endにpostできる事の確認
-    public function test_認証済みユーザーはログイン中にrest_endへポストできる()
+    public function test_認証済みユーザーはログイン中にrest_endへポストするとindexが表示される()
     {
         $user = User::factory()->create();
         $response = $this->actingAs($user);
@@ -173,16 +122,6 @@ class AtteTest extends TestCase
         $response = $this->post('/rest/end');
 
         $response->assertRedirect(route('index'));
-    }
-
-    // ログインしてない場合に/rest/endにpostできない事の確認
-    public function test_ログイン中でなければrest_endへポストできない()
-    {
-        $user = User::factory()->create();
-
-        $response = $this->post('/rest/end');
-
-        $this->assertGuest();
     }
 
     public function test_認証済みユーザーのログイン中でも存在しない画面へアクセスできない()
