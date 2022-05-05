@@ -82,25 +82,18 @@ http://pure-caverns-88245.herokuapp.com/
 
 ### Docker のインストール
 
-[こちら](https://www.docker.com)から Docker の web サイトへ移動し、右上の Get Started をクリックするとダウンロード画面が表示されます。  
-左側の Docker Desktop の Download for Mac をクリックするとダウンロードが開始されます。  
-Docker .dmg ファイルのダウンロードが完了したらダブルクリくを行い、左側の Docker を Applications フォルダにドラッグ＆ドロップしてください。  
-メニューの移動からアプリケーションを選択すると Docker がインストールされていると思うので Docker をダブルクリックで起動してください。ファイルを開くための確認画面が表示されるので、開くをクリックしてください。  
-Docker Desktop を起動するための権限が必要となるため、パスワードを入力する必要があります。そのまま OK ボタンをクリックしてください。  
-パスワード入力画面が表示されるので、OS のユーザ名、パスワードを入力してください。  
-サービスアグリーメントの画面が表示されるので、内容に問題がない場合は I accept the terms にチェックを行い Accept ボタンをクリックしてください。Docker が起動されます。
+-   [こちら](https://www.docker.com)から Docker の web サイトへ移動し、右上の Get Started をクリックするとダウンロード画面が表示されます。
+-   左側の Docker Desktop の Download for Mac をクリックするとダウンロードが開始されます。
+-   Docker .dmg ファイルのダウンロードが完了したらダブルクリくを行い、左側の Docker を Applications フォルダにドラッグ＆ドロップしてください。
+-   メニューの移動からアプリケーションを選択すると Docker がインストールされていると思うので Docker をダブルクリックで起動してください。ファイルを開くための確-認画面が表示されるので、開くをクリックしてください。
+-   Docker Desktop を起動するための権限が必要となるため、パスワードを入力する必要があります。そのまま OK ボタンをクリックしてください。
+-   パスワード入力画面が表示されるので、OS のユーザ名、パスワードを入力してください。
+-   サービスアグリーメントの画面が表示されるので、内容に問題がない場合は I accept the terms にチェックを行い Accept ボタンをクリックしてください。Docker が起動されます。
 
 ### GitHub から Clone
 
-```
+```
 $ git clone https://github.com/makoto-0358/20210918_Advance_Atte.git
-
-```
-
-```
-
-$ php artisan key:generate
-$ php artisan config:clear
 
 ```
 
@@ -118,36 +111,7 @@ $ docker run --rm \ -u "$(id -u):$(id -g)" \ -v $(pwd):/var/www/html \ -w /var/w
 
 ```
 
-### Dockerコンテナの起動
-```
-
-$ ./vendor/bin/sail up -d
-
-```
-
-## Laravelの　APP_KEY生成
-```
-
-$ ./vendor/bin/sail aitisan key:genarate
-
-```
-
-### Node.jsのパッケージをインストール
-```
-
-$ ./vendor/bin/sail npm install
-$ ./vendor/bin/sail npm run dev
-
-```
-
-### マイグレーション実行
-```
-
-$ ./vendor/bin/sail artisan migrate
-
-```
-
-### .env の設定(Gmailを使用した例)
+### .env の設定(Gmail を使用した例)
 
 ```
 
@@ -171,14 +135,56 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ```
 
-###　2段階認証設定によるメールの送信(アプリパスワードの設定)
+###　 2 段階認証設定によるメールの送信 (アプリパスワードの設定)
 
--   (Googleアカウントに移動)[https://myaccount.google.com]し、先の.envファイルのMAIL_USERNAMEのアカウントでログインする。
+-   (Google アカウントに移動)[https://myaccount.google.com]し、先の.env ファイルの MAIL_USERNAME のアカウントでログインする。
 -   画面左側のねびゲーションパネルにある「セキュリティ」をクリック。
--   「Googleへのログイン」にある「2段階認証プロセス」をクリックして機能をオンにする。
+-   「Google へのログイン」にある「2 段階認証プロセス」をクリックして機能をオンにする。
 -   その後は画面指示に従い設定を行う。
--   設定が完了すると2段階認証プロセスがオンになり、「Googleへのログイン」の所に「アプリパスワード」という項目が表示される。
+-   設定が完了すると 2 段階認証プロセスがオンになり、「Google へのログイン」の所に「アプリパスワード」という項目が表示される。
 -   「アプリパスワード」を選択し、アプリの選択をメールにし、デバイスの選択には任意の名前をつけて「生成」ボタンをクリックする。
--   16桁のパスワードが表示されるので、先の.envファイルのUSER _PASSWORDにこの16桁のパスワードを設定する。
+-   16 桁のパスワードが表示されるので、先の.env ファイルの USER \_PASSWORD にこの 16 桁のパスワードを設定する。
+
+```
+
+```
+
+$ php artisan key:generate
+$ php artisan config:clear
+
+```
+
+### Docker コンテナの起動
+
+```
+
+$ ./vendor/bin/sail up -d
+
+```
+
+### Node.js のパッケージをインストール
+
+```
+
+$ ./vendor/bin/sail npm install
+$ ./vendor/bin/sail npm run dev
+
+```
+
+### Laravel の　 APP_KEY 生成
+
+```
+
+$ ./vendor/bin/sail aitisan key:genarate
+
+```
+
+### マイグレーション実行
+
+```
+
+$ ./vendor/bin/sail artisan migrate
+
+```
 
 ```
