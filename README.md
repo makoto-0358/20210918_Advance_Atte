@@ -135,7 +135,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ```
 
-###　 2 段階認証設定によるメールの送信 (アプリパスワードの設定)
+### 2 段階認証設定によるメールの送信 (アプリパスワードの設定)
 
 -   (Google アカウントに移動)[https://myaccount.google.com]し、先の.env ファイルの MAIL_USERNAME のアカウントでログインする。
 -   画面左側のねびゲーションパネルにある「セキュリティ」をクリック。
@@ -144,15 +144,6 @@ MAIL_FROM_NAME="${APP_NAME}"
 -   設定が完了すると 2 段階認証プロセスがオンになり、「Google へのログイン」の所に「アプリパスワード」という項目が表示される。
 -   「アプリパスワード」を選択し、アプリの選択をメールにし、デバイスの選択には任意の名前をつけて「生成」ボタンをクリックする。
 -   16 桁のパスワードが表示されるので、先の.env ファイルの USER \_PASSWORD にこの 16 桁のパスワードを設定する。
-
-```
-
-```
-
-$ php artisan key:generate
-$ php artisan config:clear
-
-```
 
 ### Docker コンテナの起動
 
@@ -187,4 +178,4 @@ $ ./vendor/bin/sail artisan migrate
 
 ```
 
-```
+ブラウザで http://localhost を開く。
