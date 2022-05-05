@@ -92,23 +92,29 @@ http://pure-caverns-88245.herokuapp.com/
 
 ### GitHub から Clone
 
-```
-$ git clone https://github.com/makoto-0358/20210918_Advance_Atte.git
+次のコマンドを実行。
 
+```
+git clone https://github.com/makoto-0358/20210918_Advance_Atte.git
 ```
 
 ### Composer パッケージのインストール
 
-```
-
-$ cd 20210918_Advance_Atte
+次のコマンドを実行。
 
 ```
 
+cd 20210918_Advance_Atte
+
 ```
 
-$ docker run --rm \ -u "$(id -u):$(id -g)" \ -v $(pwd):/var/www/html \ -w /var/www/html \ laravelsail/php80-composer:latest \ bash -c "composer create-project laravel/laravel:^8.0 src && cd src && php ./artisan sail:install --with=mysql
-
+```
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd)":/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    bash -c "composer create-project laravel/laravel:^8.0 src && cd src && composer require laravel/sail && php ./artisan sail:install --with=mysql"
 ```
 
 ### .env の設定(Gmail を使用した例)
@@ -135,7 +141,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ```
 
-### 2 段階認証設定によるメールの送信 (アプリパスワードの設定)
+### 2 段階認証設定によるメールの送信(アプリパスワードの設定)
 
 -   (Google アカウントに移動)[https://myaccount.google.com]し、先の.env ファイルの MAIL_USERNAME のアカウントでログインする。
 -   画面左側のねびゲーションパネルにある「セキュリティ」をクリック。
@@ -147,34 +153,42 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ### Docker コンテナの起動
 
+次のコマンドを実行。
+
 ```
 
-$ ./vendor/bin/sail up -d
+./vendor/bin/sail up -d
 
 ```
 
 ### Node.js のパッケージをインストール
 
-```
-
-$ ./vendor/bin/sail npm install
-$ ./vendor/bin/sail npm run dev
+次のコマンドを実行。
 
 ```
 
-### Laravel の　 APP_KEY 生成
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
 
 ```
 
-$ ./vendor/bin/sail aitisan key:genarate
+### Laravel の APP_KEY 生成
+
+次のコマンドを実行。
+
+```
+
+./vendor/bin/sail aitisan key:genarate
 
 ```
 
 ### マイグレーション実行
 
+次のコマンドを実行。
+
 ```
 
-$ ./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan migrate
 
 ```
 
