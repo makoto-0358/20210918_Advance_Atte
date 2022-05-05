@@ -46,7 +46,7 @@ http://pure-caverns-88245.herokuapp.com/
 | 2   | 会員登録機能             | 会員登録することでメール認証機能が利用できるようになります。                                                    | 名前、メールアドレス、パスワードを登録します。                                                                                                                                                                                                                                                                                                         |
 | 3   | メール認証機能           | メール認証をすることで各種機能を使用可能となります。                                                            | 会員登録したメールアドレスへ送られてきたメール内のボタンをクリックすることでメール認証が完了します。                                                                                                                                                                                                                                                   |
 | 4   | パスワード再設定機能     | パスワードをお忘れの際に、再設定できます。                                                                      | ログイン画面から「パスワードをお忘れの方はこちら」をクリック後、メール認証機能同様の手続きでパスワードの再設定をします。                                                                                                                                                                                                                               |
-| 5   | ログイン、ログアウト機能 | 登録墨会員のみ利用可能です。                                                                                    | メールアドレスとパスワードが必要です。                                                                                                                                                                                                                                                                                                                 |
+| 5   | ログイン、ログアウト機能 | メール認証済みの会員のみ利用可能です。                                                                          | メール認証が必要です。                                                                                                                                                                                                                                                                                                                                 |
 | 6   | 勤務開始、勤務終了       | 勤務開始、勤務終了時刻の記録及び勤務時間の計算に使用します。                                                    | 勤務中でなければ勤務開始ボタンのみ押せる様になっており、勤務終了ボタンは勤務中のみ押せる様になっています。勤務終了後であれば、同じ日でも再び勤務開始ボタンを押すことはできます。出勤した時点を基準として関連する時刻データが記録されますので、出勤している状態で日を跨いだ場合、その日最初の操作では勤務開始ボタンは押せない様になっています。         |
 | 7   | 休憩開始、休憩終了       | 休憩開始、休憩終了時刻の記録及び休憩時間の計算に使用します。                                                    | 休憩開始ボタン、休憩終了ボタンは勤務中のみ押せる様になっています。一度の出勤内では何度でも休憩することが可能です。休憩中でなければ休憩開始ボタンのみ押せる様になっており、休憩中であれば休憩終了ボタンのみ押せる様になっています。                                                                                                                     |
 | 8   | 日付別勤怠情報取得       | 特定日付における 1 出勤毎に、会員名と勤務開始及び勤務終了時刻、休憩時間、勤務時間を表示します。                 | 休憩時間は 1 出勤記録内における総休憩時間を示し、勤務時間は 1 出勤記録内における総休憩時間を除いた総時間を示します。出勤した時点を基準として関連する時刻データが記録されますので、出勤している状態で日を跨いだ出勤記録は勤務開始ボタンを押した日のものとして扱っています。そのため、表示上は勤務開始時刻よりも勤務終了時刻が先になることがあり得ます。 |
@@ -60,13 +60,14 @@ http://pure-caverns-88245.herokuapp.com/
 
 ## 開発環境
 
-| 名称          | バージョン   |
-| ------------- | ------------ |
-| Composer      | 2.1.3        |
-| Laravel       | 8.58.0       |
-| MySQL         | 5.7.32       |
-| PHP           | 7.4.21       |
-| Google Chrome | 96.0.4664.55 |
+| 名称             | バージョン   |
+| ---------------- | ------------ |
+| Docker           | 20.10.13     |
+| Composer         | 2.1.3        |
+| Laravel          | 8.58.0       |
+| MySQL(Docker 内) | 8.0          |
+| PHP(Docker 内)   | 7.4          |
+| Google Chrome    | 96.0.4664.55 |
 
 ## 動作確認済み
 
@@ -77,67 +78,131 @@ http://pure-caverns-88245.herokuapp.com/
 | PC    | Firefox       | 94.0.1(64 ビット) |
 | SP    | iOS           | 15.1              |
 
-## 環境構築手順
+## 環境構築手順(以下 Mac の場合)
 
-### Composer のインストール方法
+### Docker のインストール
 
--   Mac の場合
+[こちら](https://www.docker.com)から Docker の web サイトへ移動し、右上の Get Started をクリックするとダウンロード画面が表示されます。左側の Docker Desktop の Download for Mac をクリックするとダウンロードが開始されます。
+Docker .dmg ファイルのダウンロードが完了したらダブルクリくを行い、左側の Docker を Applications フォルダにドラッグ＆ドロップしてください。
+メニューの移動からアプリケーションを選択すると Docker がインストールされていると思うので Docker をダブルクリックで起動してください。ファイルを開くための確認画面が表示されるので、開くをクリックしてください。
+Docker Desktop を起動するための権限が必要となるため、パスワードを入力する必要があります。そのまま OK ボタンをクリックしてください。
+パスワード入力画面が表示されるので、OS のユーザ名、パスワードを入力してください。
+サービスアグリーメントの画面が表示されるので、内容に問題がない場合は I accept the terms にチェックを行い Accept ボタンをクリックしてください。Docker が起動されます。
 
-[こちら](https://getcomposer.org/download/)から Composer の Web サイトに移動し、ページの下部にある Manual Download から 2.〇.〇の最新バージョンのリンクをクリックしてください。  
-これで「ダウンロード」フォルダに「composer.phar」というファイルがダウンロードされます。  
-続いてターミナルを起動後、Download ディレクトリに移動し以下のコマンドを実行します。  
-`cd Downloads`  
-`sudo mv composer.phar /usr/local/bin/composer`  
-`chmod a+x /usr/local/bin/composer`
+## GitHub から Clone
 
--   Windows の場合
-    [こちら](https://getcomposer.org/doc/00-intro.md#installation-windows)から Composer の Web サイトに移動します。  
-    「Installation – Windows の Using the Installer」の文章中に「Composer-Setup.exe」というリンクがあるのでインストーラをダウンロードしてください。  
-    ダウンロードしたインストーラを起動します。  
-    起動すると画面に「Developer mode」というチェックボックスが表示された画面が現れるので OFF のまま次に「Next」をクリックします。  
-    使用する PHP を設定する画面です。XAMPP の PHP を選択して次に進んでください。  
-    Settings Check では「C:¥xampp¥php¥php.exe」を選択し「Next」をクリックします。  
-    インストール画面まで「Next」を選択し、インストール画面では「Install」を選択します。  
-    その後「Finish」ボタンを押したらインストール完了です。
+```
+git clone https://github.com/makoto-0358/20210918_Advance_Atte.git
 
-## GitHub から Clone(Mac で MySQL を使用している場合の例)
+```
 
-`cd /Applications/MAMP/htdocs/Atte`
+<!-- `cd 20210918_Advance_Atte` -->
 
-`git clone https://github.com/makoto-0358/20210918_Advance_Atte.git`
+<!-- `composer install` -->
 
-`cd 20210918_Advance_Atte`
+<!-- `cp .env.example .env` -->
 
-`composer install`
+```
 
-`cp .env.example .env`
+php artisan key:generate
+php artisan config:clear
 
-`php artisan key:generate`
+```
 
-`php artisan config:clear`
+### Composer パッケージのインストール
 
-## データベース作成(Mac で MySQL を使用している場合の例)
+```
+
+cd 20210918_Advance_Atte
+
+```
+
+```
+
+docker run --rm \ -u "$(id -u):$(id -g)" \ -v $(pwd):/var/www/html \ -w /var/www/html \ laravelsail/php80-composer:latest \ bash -c "composer create-project laravel/laravel:^8.0 src && cd src && php ./artisan sail:install --with=mysql
+
+```
+
+<!-- ### Composer のインストール方法(Mac の場合)
+
+[こちら](https://getcomposer.org/download/)から Composer の Web サイトに移動し、ページの下部にある Manual Download から 2.〇.〇の最新バージョンのリンクをクリックしてください。
+これで「ダウンロード」フォルダに「composer.phar」というファイルがダウンロードされます。
+続いてターミナルを起動後、Download ディレクトリに移動し以下のコマンドを実行します。
+`cd Downloads`
+`sudo mv composer.phar /usr/local/bin/composer`
+`chmod a+x /usr/local/bin/composer` -->
+
+## Dockerコンテナの起動
+```
+
+./vendor/bin/sail up -d
+
+```
+
+## Laravelの　APP_KEY生成
+```
+
+./vendor/bin/sail aitisan key:genarate
+
+```
+
+## Node.jsのパッケージをインストール
+```
+
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
+
+```
+
+## マイグレーション実行
+```
+
+./vendor/bin/sail artisan migrate
+
+```
+
+<!-- ## データベース作成(Mac で MySQL を使用している場合の例)
 
 `cd /Applications/MAMP/Library/bin`
 `./mysql -u root -p`
-`CREATE DATABASE attedb;`
+`CREATE DATABASE attedb;` -->
 
-## .env の設定(Mac で MySQL を使用している場合の例)
+## .env の設定(Gmailを使用した例)
 
-`DB_CONNECTION=mysql`
+```
 
-`DB_HOST=127.0.0.1`
+APP_NAME=Atte
+APP_ENV=local
+APP_URL=http://localhost
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=Atteddb
+DB_USERNAME=root
+DB_PASSWORD=password
 
-`DB_PORT=3306`
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=送信元メールアドレス(hoge@gmail.comの形式)
+MAIL_PASSWORD=アプリパスワード(後述)
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_NAME="${APP_NAME}"
 
-`DB_DATABASE=atteddb`
+```
 
-`DB_USERNAME=root`
+##　2段階認証設定によるメールの送信(アプリパスワードの設定)
 
-`DB_PASSWORD=root`
+-   (Googleアカウントに移動)[https://myaccount.google.com]し、先の.envファイルのMAIL_USERNAMEのアカウントでログインする。
+-   画面左側のねびゲーションパネルにある「セキュリティ」をクリック。
+-   「Googleへのログイン」にある「2段階認証プロセス」をクリックして機能をオンにする。
+-   その後は画面指示に従い設定を行う。
+-   設定が完了すると2段階認証プロセスがオンになり、「Googleへのログイン」の所に「アプリパスワード」という項目が表示される。
+-   「アプリパスワード」を選択し、アプリの選択をメールにし、デバイスの選択には任意の名前をつけて「生成」ボタンをクリックする。
+-   16桁のパスワードが表示されるので、先の.envファイルのUSER _PASSWORDにこの16桁のパスワードを設定する。
 
-## データベース作成後
+<!-- ## データベース作成後
 
 `php artisan serve`
-
-`php artisan migrate`
+`php artisan migrate` -->
+```
