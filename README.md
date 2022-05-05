@@ -82,30 +82,25 @@ http://pure-caverns-88245.herokuapp.com/
 
 ### Docker のインストール
 
-[こちら](https://www.docker.com)から Docker の web サイトへ移動し、右上の Get Started をクリックするとダウンロード画面が表示されます。左側の Docker Desktop の Download for Mac をクリックするとダウンロードが開始されます。
-Docker .dmg ファイルのダウンロードが完了したらダブルクリくを行い、左側の Docker を Applications フォルダにドラッグ＆ドロップしてください。
-メニューの移動からアプリケーションを選択すると Docker がインストールされていると思うので Docker をダブルクリックで起動してください。ファイルを開くための確認画面が表示されるので、開くをクリックしてください。
-Docker Desktop を起動するための権限が必要となるため、パスワードを入力する必要があります。そのまま OK ボタンをクリックしてください。
-パスワード入力画面が表示されるので、OS のユーザ名、パスワードを入力してください。
+[こちら](https://www.docker.com)から Docker の web サイトへ移動し、右上の Get Started をクリックするとダウンロード画面が表示されます。  
+左側の Docker Desktop の Download for Mac をクリックするとダウンロードが開始されます。  
+Docker .dmg ファイルのダウンロードが完了したらダブルクリくを行い、左側の Docker を Applications フォルダにドラッグ＆ドロップしてください。  
+メニューの移動からアプリケーションを選択すると Docker がインストールされていると思うので Docker をダブルクリックで起動してください。ファイルを開くための確認画面が表示されるので、開くをクリックしてください。  
+Docker Desktop を起動するための権限が必要となるため、パスワードを入力する必要があります。そのまま OK ボタンをクリックしてください。  
+パスワード入力画面が表示されるので、OS のユーザ名、パスワードを入力してください。  
 サービスアグリーメントの画面が表示されるので、内容に問題がない場合は I accept the terms にチェックを行い Accept ボタンをクリックしてください。Docker が起動されます。
 
-## GitHub から Clone
+### GitHub から Clone
 
 ```
-git clone https://github.com/makoto-0358/20210918_Advance_Atte.git
+$ git clone https://github.com/makoto-0358/20210918_Advance_Atte.git
 
 ```
 
-<!-- `cd 20210918_Advance_Atte` -->
-
-<!-- `composer install` -->
-
-<!-- `cp .env.example .env` -->
-
 ```
 
-php artisan key:generate
-php artisan config:clear
+$ php artisan key:generate
+$ php artisan config:clear
 
 ```
 
@@ -113,61 +108,46 @@ php artisan config:clear
 
 ```
 
-cd 20210918_Advance_Atte
+$ cd 20210918_Advance_Atte
 
 ```
 
 ```
 
-docker run --rm \ -u "$(id -u):$(id -g)" \ -v $(pwd):/var/www/html \ -w /var/www/html \ laravelsail/php80-composer:latest \ bash -c "composer create-project laravel/laravel:^8.0 src && cd src && php ./artisan sail:install --with=mysql
+$ docker run --rm \ -u "$(id -u):$(id -g)" \ -v $(pwd):/var/www/html \ -w /var/www/html \ laravelsail/php80-composer:latest \ bash -c "composer create-project laravel/laravel:^8.0 src && cd src && php ./artisan sail:install --with=mysql
 
 ```
 
-<!-- ### Composer のインストール方法(Mac の場合)
-
-[こちら](https://getcomposer.org/download/)から Composer の Web サイトに移動し、ページの下部にある Manual Download から 2.〇.〇の最新バージョンのリンクをクリックしてください。
-これで「ダウンロード」フォルダに「composer.phar」というファイルがダウンロードされます。
-続いてターミナルを起動後、Download ディレクトリに移動し以下のコマンドを実行します。
-`cd Downloads`
-`sudo mv composer.phar /usr/local/bin/composer`
-`chmod a+x /usr/local/bin/composer` -->
-
-## Dockerコンテナの起動
+### Dockerコンテナの起動
 ```
 
-./vendor/bin/sail up -d
+$ ./vendor/bin/sail up -d
 
 ```
 
 ## Laravelの　APP_KEY生成
 ```
 
-./vendor/bin/sail aitisan key:genarate
+$ ./vendor/bin/sail aitisan key:genarate
 
 ```
 
-## Node.jsのパッケージをインストール
+### Node.jsのパッケージをインストール
 ```
 
-./vendor/bin/sail npm install
-./vendor/bin/sail npm run dev
-
-```
-
-## マイグレーション実行
-```
-
-./vendor/bin/sail artisan migrate
+$ ./vendor/bin/sail npm install
+$ ./vendor/bin/sail npm run dev
 
 ```
 
-<!-- ## データベース作成(Mac で MySQL を使用している場合の例)
+### マイグレーション実行
+```
 
-`cd /Applications/MAMP/Library/bin`
-`./mysql -u root -p`
-`CREATE DATABASE attedb;` -->
+$ ./vendor/bin/sail artisan migrate
 
-## .env の設定(Gmailを使用した例)
+```
+
+### .env の設定(Gmailを使用した例)
 
 ```
 
@@ -191,7 +171,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ```
 
-##　2段階認証設定によるメールの送信(アプリパスワードの設定)
+###　2段階認証設定によるメールの送信(アプリパスワードの設定)
 
 -   (Googleアカウントに移動)[https://myaccount.google.com]し、先の.envファイルのMAIL_USERNAMEのアカウントでログインする。
 -   画面左側のねびゲーションパネルにある「セキュリティ」をクリック。
@@ -201,8 +181,4 @@ MAIL_FROM_NAME="${APP_NAME}"
 -   「アプリパスワード」を選択し、アプリの選択をメールにし、デバイスの選択には任意の名前をつけて「生成」ボタンをクリックする。
 -   16桁のパスワードが表示されるので、先の.envファイルのUSER _PASSWORDにこの16桁のパスワードを設定する。
 
-<!-- ## データベース作成後
-
-`php artisan serve`
-`php artisan migrate` -->
 ```
