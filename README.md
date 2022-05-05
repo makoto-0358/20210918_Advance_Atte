@@ -84,11 +84,11 @@ http://pure-caverns-88245.herokuapp.com/
 
 -   [こちら](https://www.docker.com)から Docker の web サイトへ移動し、右上の Get Started をクリックするとダウンロード画面が表示されます。
 -   左側の Docker Desktop の Download for Mac をクリックするとダウンロードが開始されます。
--   Docker .dmg ファイルのダウンロードが完了したらダブルクリくを行い、左側の Docker を Applications フォルダにドラッグ＆ドロップしてください。
--   メニューの移動からアプリケーションを選択すると Docker がインストールされていると思うので Docker をダブルクリックで起動してください。ファイルを開くための確-認画面が表示されるので、開くをクリックしてください。
+-   Docker .dmg ファイルのダウンロードが完了したらダブルクリックを行い、左側の Docker を Applications フォルダにドラッグ＆ドロップしてください。
+-   メニューの移動からアプリケーションを選択すると Docker がインストールされているので Docker をダブルクリックで起動してください。ファイルを開くための認画面が表示されるので、開くをクリックしてください。
 -   Docker Desktop を起動するための権限が必要となるため、パスワードを入力する必要があります。そのまま OK ボタンをクリックしてください。
 -   パスワード入力画面が表示されるので、OS のユーザ名、パスワードを入力してください。
--   サービスアグリーメントの画面が表示されるので、内容に問題がない場合は I accept the terms にチェックを行い Accept ボタンをクリックしてください。Docker が起動されます。
+-   サービスアグリーメントの画面が表示されるので、内容に問題がない場合は I accept the terms にチェックを行い Accept ボタンをクリックしてください。
 
 ### GitHub から Clone
 
@@ -96,6 +96,10 @@ http://pure-caverns-88245.herokuapp.com/
 
 ```
 git clone https://github.com/makoto-0358/20210918_Advance_Atte.git
+```
+
+```
+cp .env.example .env
 ```
 
 ### Composer パッケージのインストール
@@ -117,33 +121,20 @@ docker run --rm \
     bash -c "composer create-project laravel/laravel:^8.0 src && cd src && composer require laravel/sail && php ./artisan sail:install --with=mysql"
 ```
 
-### .env の設定(Gmail を使用した例)
+### .env の修正(Gmail を使用した例)
 
 ```
+DB_PASSWORD=パスワード
 
-APP_NAME=Atte
-APP_ENV=local
-APP_URL=http://localhost
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=Atteddb
-DB_USERNAME=root
-DB_PASSWORD=password
-
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=465
 MAIL_USERNAME=送信元メールアドレス(hoge@gmail.comの形式)
 MAIL_PASSWORD=アプリパスワード(後述)
-MAIL_ENCRYPTION=ssl
 MAIL_FROM_NAME="${APP_NAME}"
 
 ```
 
 ### 2 段階認証設定によるメールの送信(アプリパスワードの設定)
 
--   (Google アカウントに移動)[https://myaccount.google.com]し、先の.env ファイルの MAIL_USERNAME のアカウントでログインする。
+-   [Google アカウントに移動](https://myaccount.google.com)し、先の.env ファイルの MAIL_USERNAME のアカウントでログインする。
 -   画面左側のねびゲーションパネルにある「セキュリティ」をクリック。
 -   「Google へのログイン」にある「2 段階認証プロセス」をクリックして機能をオンにする。
 -   その後は画面指示に従い設定を行う。
@@ -168,6 +159,9 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 ./vendor/bin/sail npm install
+```
+
+```
 ./vendor/bin/sail npm run dev
 
 ```
