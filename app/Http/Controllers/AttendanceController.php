@@ -18,7 +18,7 @@ class AttendanceController extends Controller
         // 出勤中レコードを検索。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
 
-        // 出勤中の場合、休憩中レコードを上書きする。
+        // 出勤中の場合、休憩中レコードを検索し、見つかれば上書きする。
         if(isset($attendance)){
             $rest = Rest::where('attendance_id', $attendance['id'])->latest('id')->whereNull('end_time')->first();
         }
