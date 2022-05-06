@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(2)->create()->each(function($user){
+        User::factory()->count(6)->create()->each(function($user){
             Attendance::factory()->count(2)->make()->each(function($attendance)use($user){
                 $user->attendances()->save($attendance);
                 Rest::factory()->count(1)->make()->each(function($rest)use($attendance){
