@@ -43,10 +43,6 @@
     </table>
 
     <!-- ページネーション -->
-    <!-- <div class="flex justify-center items-center"> -->
-    <!-- <div class="my-12 flex justify-center items-center"> -->
-    <!-- <div class="my-auto flex justify-center items-center"> -->
-    <!-- <div class="my-auto flex justify-center"> -->
     <div class="flex justify-center">
         <div class="my-12">{{$items->links()}}</div>
     </div>

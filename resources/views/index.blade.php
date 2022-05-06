@@ -1,5 +1,5 @@
 <x-appmember-layout>
-    <div class="py-10 flex justify-center text-2xl font-bold">
+    <div class="px-4 py-10 text-center text-2xl font-bold">
         {{ Auth::user()->name }}さんお疲れ様です！
     </div>
 
@@ -16,13 +16,6 @@
         勤務中ではありません。
         @endisset
     </div>
-
-    <!-- ボタンを押した動作に対するフラッシュメッセージ -->
-    <!-- @if(session('message'))
-        <div class="w-full text-center bg-green-200 bg-opacity-75 absolute top-0 transition-all duration-1000 transform translate-y-64">
-            {{session('message')}}
-        </div>
-    @endif -->
 
     <!-- 各種ボタン -->
     <div class="py-12 flex flex-wrap text-2xl md:py-12 md:mx-40">
