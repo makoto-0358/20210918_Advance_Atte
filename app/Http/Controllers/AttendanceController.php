@@ -62,23 +62,13 @@ class AttendanceController extends Controller
         // 出勤中レコードを検索。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
 
-        // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
-        // $message = '';
-
         // 出勤中でなければ現在時刻で勤務開始し、出勤中であれば勤務開始しない。
         if(!isset($attendance)){
             $form = $request->all();
             $form['user_id'] = Auth::user()->id;
             $form['start_time'] = now();
             Attendance::create($form);
-            // $message = '勤務開始しました';
-        // }else{
-        //     $message = '勤務中なので勤務開始できません';
         }
-
-        // if(!empty($message)){
-        //     $request->session()->flash('message', $message);
-        // }
         
         return redirect()->route('index');
     }
@@ -89,9 +79,6 @@ class AttendanceController extends Controller
         // 出勤中レコードを検索。
         $attendance = Attendance::where('user_id', Auth::user()->id)->latest('id')->whereNull('end_time')->first();
 
-        // フラッシュメッセージ。グレーアウト＆postなのでブラウザ上では操作できない場合も念の為設定しておく。
-        // $message = '';
-
         // 出勤中である場合、休憩中レコードを検索。
             // 休憩中でなければ現在時刻で勤務終了する。
         if(isset($attendance)){
@@ -101,17 +88,8 @@ class AttendanceController extends Controller
                 $form['end_time'] = now();
                 unset($form["_token"]);
                 $attendance->update($form);
-                // $message = '勤務終了しました';
-            // }else{
-            //     $message = '休憩中なので勤務終了できません';
             }
-        // }else{
-        //     $message = '勤務開始していないため勤務終了できません';
         }
-
-        // if(!empty($message)){
-        //     $request->session()->flash('message', $message);
-        // }
 
         return redirect()->route('index');
     }

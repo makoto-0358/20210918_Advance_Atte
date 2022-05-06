@@ -19,10 +19,6 @@ use App\Models\Rest;
 |
 */
 
-// Route::get('/session', [SessionController::class, 'getSes'])
-// ->middleware(['verified']);
-// Route::post('/session', [SessionController::class, 'postSes']);
-
 Route::get('/', [AttendanceController::class, 'index'])
 ->middleware(['verified'])->name('index');
 
